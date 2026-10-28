@@ -125,10 +125,21 @@ class AuthStore {
       runInAction(() => {
         this.user = session.user;
 
-        this.status =
-          this.isBiometricsEnabled && this.isBiometricsAvailable
-            ? 'biometric_required'
-            : 'authenticated';
+
+        if (!this.isBiometricsEnabled) {
+          this.status = 'authenticated';
+          return;
+        }
+
+
+        if (this.isBiometricsAvailable) {
+          this.status = 'biometric_required';
+        } else {
+
+          this.status = 'unauthenticated';
+          this.user = null;
+          this.error = 'Biometrics is unavailable. Please login using your password.';
+        }
       });
     } catch {
       runInAction(() => {

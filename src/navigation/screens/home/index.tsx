@@ -18,10 +18,27 @@ import { vehicleStore } from '../../../stores';
 type Props = NativeStackScreenProps<HomeStackParamList, 'HomeMain'>;
 
 export const HomeScreen = observer(({ navigation }: Props) => {
+    const getWelcomeText = (): string => {
+    const hour = new Date().getHours();
+
+    if (hour >= 5 && hour < 12) {
+        return 'Good morning';
+    }
+
+    if (hour >= 12 && hour < 18) {
+        return 'Good afternoon';
+    }
+
+    if (hour >= 18 && hour < 22) {
+        return 'Good evening';
+    }
+
+    return 'Good night';
+    };
   return (
     <ScreenContainer style={{padding:20}}>
         <Header
-            title="Good morning, Alex"
+            title={getWelcomeText()}
             par="Here's your fleet overview"
         />
         <FleetOverview />
