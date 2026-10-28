@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react';
 import { authStore } from './stores/AuthStore';
 import { ThemeProvider, useTheme } from './theme/ThemeContext';
 import { AppStatusBar } from './components/StatusBar';
+import { LanguageProvider } from './localization/LangContext';
 
 EStyleSheet.build({
   $primaryColor: colors.primaryColor,
@@ -94,7 +95,11 @@ const App = observer(() => {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <ThemeProvider>
-        <MainContent />
+
+          <LanguageProvider>
+          <MainContent />
+        </LanguageProvider>
+
       </ThemeProvider>
     </GestureHandlerRootView>
   );

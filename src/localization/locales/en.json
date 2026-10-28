@@ -1,0 +1,21 @@
+{
+    "home": {
+        "welcomeMorning" : "Good morning",
+        "welcomeAfterNoon" : "Good afternoon",
+        "welcomeEvening" : "Good evening",
+        "welcomeNight" : "Good night",
+        "par" : "Here's your fleet overview",
+        "overview": {
+            "title": "Total fleet",
+            "vehicles": "vehicles",
+            "active" : "Active",
+            "availability" : "Availability"
+        },
+        "cards": {
+            "active_vehicles" : "Active Vehicles",
+            "in_maintenance" : "In Maintenance",
+            "inspections_due" : "Inspections Due",
+            "overdue" : "Overdue"
+        }
+    }
+}

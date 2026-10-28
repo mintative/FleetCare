@@ -9,6 +9,7 @@ import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import { useNavigation } from "@react-navigation/native";
 import { observer } from "mobx-react-lite";
 import { vehicleStore } from "../../stores";
+import { useTranslation } from "react-i18next";
 
 
 
@@ -23,6 +24,7 @@ type NavigationProp = BottomTabNavigationProp<
 
 export const FleetOverview = observer(() => {
     const navigation = useNavigation<NavigationProp>();
+    const {t} = useTranslation();
 
     const TOTAL_FLEET = vehicleStore.totalVehicles;
     const ACTIVE_FLEET = vehicleStore.activeVehicles;
@@ -39,7 +41,7 @@ export const FleetOverview = observer(() => {
             <View style={styles.container}>
             <View style={styles.header}>
                 <View style={styles.info}>
-                    <AppText style={styles.label}>TOTAL FLEET</AppText>
+                    <AppText style={styles.label}>{t("home.overview.title").toUpperCase()}</AppText>
 
                     <View style={styles.totalRow}>
                         <AppText style={styles.totalNumber}>
@@ -47,14 +49,14 @@ export const FleetOverview = observer(() => {
                         </AppText>
 
                         <AppText style={styles.vehicleLabel}>
-                            vehicles
+                            {t("home.overview.vehicles")}
                         </AppText>
                     </View>
 
                     <View style={styles.badge}>
                         <AppText style={styles.check}>✓</AppText>
                         <AppText style={styles.badgeText}>
-                            {ACTIVE_FLEET} operational
+                            {ACTIVE_FLEET} {t("home.overview.active")}
                         </AppText>
                     </View>
                 </View>
@@ -67,7 +69,7 @@ export const FleetOverview = observer(() => {
                     </View>
 
                     <AppText style={styles.availabilityLabel}>
-                        Availability
+                        {t("home.overview.availability")}
                     </AppText>
                 </View>
             </View>
@@ -85,7 +87,7 @@ export const FleetOverview = observer(() => {
                 <View style={styles.stat}>
                     <View style={styles.activeDot} />
                     <AppText style={styles.statText}>
-                        Active {ACTIVE_FLEET}
+                        {t("home.overview.active")} {ACTIVE_FLEET}
                     </AppText>
                 </View>
 

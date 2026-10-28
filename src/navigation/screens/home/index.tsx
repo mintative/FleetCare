@@ -14,60 +14,63 @@ import { styles } from './styles';
 import { colors } from '../../../theme/colors';
 import { observer } from 'mobx-react-lite';
 import { vehicleStore } from '../../../stores';
+import { useTranslation } from 'react-i18next';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'HomeMain'>;
 
 export const HomeScreen = observer(({ navigation }: Props) => {
+    const {t} = useTranslation();
+
     const getWelcomeText = (): string => {
     const hour = new Date().getHours();
 
     if (hour >= 5 && hour < 12) {
-        return 'Good morning';
+        return t("home.welcomeMorning");
     }
 
     if (hour >= 12 && hour < 18) {
-        return 'Good afternoon';
+        return t("home.welcomeAfterNoon");
     }
 
     if (hour >= 18 && hour < 22) {
-        return 'Good evening';
+        return t("home.welcomeEvening");
     }
 
-    return 'Good night';
+    return t("home.welcomeNight");
     };
   return (
     <ScreenContainer style={{padding:20}}>
         <Header
             title={getWelcomeText()}
-            par="Here's your fleet overview"
+            par={t("home.par")}
         />
         <FleetOverview />
         <View style={styles.cardsContainer}>
             <StatsCard
                 Icon={VehicleIcon}
                 number={vehicleStore.activeVehicles}
-                par="Active Vehicles"
+                par={t("home.cards.active_vehicles")}
                 darkColor={colors.greenDark}
                 lightColor={colors.greenLight}
             />
             <StatsCard
                 Icon={MaintenanceIcon}
                 number={vehicleStore.maintenanceVehicles}
-                par="In Maintenance"
+                par={t("home.cards.in_maintenance")}
                 darkColor={colors.blueDark}
                 lightColor={colors.blueLight}
             />
             <StatsCard
                 Icon={OverdueIcon}
                 number={vehicleStore.inspectionWarningVehicles}
-                par="Inspections Due"
+                par={t("home.cards.inspections_due")}
                 darkColor={colors.orangeDark}
                 lightColor={colors.orangeLight}
             />
             <StatsCard
                 Icon={WarningIcon}
                 number={vehicleStore.overDueVehicles}
-                par="Overdue"
+                par={t("home.cards.overdue")}
                 darkColor={colors.redDark}
                 lightColor={colors.redLight}
             />

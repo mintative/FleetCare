@@ -1934,6 +1934,8 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
+  - RNDeviceInfo (15.0.2):
+    - React-Core
   - RNGestureHandler (3.4.0):
     - hermes-engine
     - RCTRequired
@@ -1959,6 +1961,29 @@ PODS:
     - RNWorklets (>= 0.8.0)
     - Yoga
   - RNKeychain (10.0.0):
+    - hermes-engine
+    - RCTRequired
+    - RCTTypeSafety
+    - React-bridging
+    - React-Core
+    - React-Core-prebuilt
+    - React-cxxstableapi
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/core
+    - ReactNativeDependencies
+    - Yoga
+  - RNLocalize (3.7.2):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -2376,8 +2401,10 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - ReactNativeDependencies (from `../node_modules/react-native/third-party-podspecs/ReactNativeDependencies.podspec`)
   - "RNDateTimePicker (from `../node_modules/@react-native-community/datetimepicker`)"
+  - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNKeychain (from `../node_modules/react-native-keychain`)
+  - RNLocalize (from `../node_modules/react-native-localize`)
   - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
@@ -2572,10 +2599,14 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native/third-party-podspecs/ReactNativeDependencies.podspec"
   RNDateTimePicker:
     :path: "../node_modules/@react-native-community/datetimepicker"
+  RNDeviceInfo:
+    :path: "../node_modules/react-native-device-info"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNKeychain:
     :path: "../node_modules/react-native-keychain"
+  RNLocalize:
+    :path: "../node_modules/react-native-localize"
   RNPermissions:
     :path: "../node_modules/react-native-permissions"
   RNReanimated:
@@ -2684,8 +2715,10 @@ SPEC CHECKSUMS:
   ReactCommon: 145a14b942b19fc2fe38927f261955ada56978aa
   ReactNativeDependencies: d3b7423ba1e52525e42085c8470109abde583d2e
   RNDateTimePicker: 4ebf97a8ee633ad5e86a34b1196a9202b8e57760
+  RNDeviceInfo: 4c852998208b60dc192ae3529e5867817719ad1e
   RNGestureHandler: b5512a093e6923dd1c31fbdd8e6186cd0ebb3541
   RNKeychain: 990ea9078621f2617a9cdabdb4cfb485a8c1560d
+  RNLocalize: 6b1ada941cb6116aace7d9f508a9fdd24d792ff8
   RNPermissions: a4c29cf23f3ed3de48912d8bb8762534615bd888
   RNReanimated: 3018727dbf272754d0f31ef73f619e49ade7baf0
   RNScreens: 6d0d3b7819284dbf9f222899eb819f069fce4b8b

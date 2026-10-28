@@ -1,0 +1,21 @@
+{
+    "home": {
+        "welcomeMorning": "Dzień dobry",
+        "welcomeAfterNoon": "Dzień dobry",
+        "welcomeEvening": "Dobry wieczór",
+        "welcomeNight" : "Dobranoc",
+        "par": "Oto przegląd Twojej floty",
+        "overview": {
+            "title": "Cała flota",
+            "vehicles": "pojazdów",
+            "active": "Aktywne",
+            "availability": "Dostępność"
+        },
+        "cards": {
+            "active_vehicles": "Aktywne pojazdy",
+            "in_maintenance": "W serwisie",
+            "inspections_due": "Nadchodzące przeglądy",
+            "overdue": "Zaległe"
+        }
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "home": {
+        "welcomeMorning": "Доброго ранку",
+        "welcomeAfterNoon": "Доброго дня",
+        "welcomeEvening": "Доброго вечора",
+        "welcomeNight" : "Доброї ночі",
+        "par": "Ось огляд вашого автопарку",
+        "overview": {
+            "title": "Усього автопарк",
+            "vehicles": "транспортних засобів",
+            "active": "Активні",
+            "availability": "Доступність"
+        },
+        "cards": {
+            "active_vehicles": "Активні транспортні засоби",
+            "in_maintenance": "На технічному обслуговуванні",
+            "inspections_due": "Заплановані техогляди",
+            "overdue": "Протерміновано"
+        }
+    }
+}
