@@ -9,14 +9,13 @@ export const styles = EStyleSheet.create({
     title: {
         fontSize: 26,
         fontWeight: '700',
-        color: '#192235',
         marginBottom: 8,
     },
 
     description: {
         fontSize: 15,
         lineHeight: 22,
-        color: '#78849F',
+        color: '#666666',
         marginBottom: 28,
     },
 

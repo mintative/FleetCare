@@ -18,7 +18,7 @@ export const StatsCard = ({Icon, number, par, lightColor, darkColor}: Props) => 
     return (
         <Container style={[styles.container, {backgroundColor: lightColor}]}>
             <View style={{flexDirection:"row", alignItems: "center", justifyContent:"space-between"}}>
-                <AppText style={styles.number}>{number}</AppText>
+                <AppText style={[styles.number, {color:"#000"}]}>{number}</AppText>
                 <View style={[styles.dot, {backgroundColor: darkColor}]}/>
                 
             </View>

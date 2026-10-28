@@ -24,6 +24,7 @@ import {
   RESULTS,
 } from "react-native-permissions";
 import { DatePickerField } from "../../DatePickerField";
+import { useTheme } from "../../../theme/ThemeContext";
 
 
 type Props = {
@@ -49,6 +50,8 @@ export const AddVehicleSheet =({onClose}: Props)=> {
 
 
   const [error, setError] = useState<string>("");
+
+  const {theme} = useTheme();
 
 
   const validateForm = (): boolean => {
@@ -320,7 +323,7 @@ export const AddVehicleSheet =({onClose}: Props)=> {
               resizeMode="cover"
             />
           ) : (
-            <View style={styles.imagePlaceholder}>
+            <View style={[styles.imagePlaceholder, {backgroundColor:theme.card, borderColor:theme.card}]}>
               <AppText style={styles.imageIcon}>+</AppText>
 
               <AppText style={styles.imagePickerTitle}>
@@ -336,19 +339,19 @@ export const AddVehicleSheet =({onClose}: Props)=> {
 
         <View style={styles.imageActions}>
           <Pressable
-            style={styles.imageActionButton}
+            style={[styles.imageActionButton, {backgroundColor: theme.card}]}
             onPress={takeVehiclePhoto}
           >
-            <AppText style={styles.imageActionText}>
+            <AppText style={[styles.imageActionText, {color:theme.text}]}>
               Take photo
             </AppText>
           </Pressable>
 
           <Pressable
-            style={styles.imageActionButton}
+            style={[styles.imageActionButton, {backgroundColor: theme.card}]}
             onPress={chooseVehiclePhoto}
           >
-            <AppText style={styles.imageActionText}>
+            <AppText style={[styles.imageActionText, {color:theme.text}]}>
               Choose from gallery
             </AppText>
           </Pressable>

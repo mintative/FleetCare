@@ -50,7 +50,7 @@ export const styles = EStyleSheet.create({
   },
 
   segmentedContainer: {
-    backgroundColor: "#f0f0f0",
+
     flexDirection: 'row',
     alignItems: 'center',
     borderRadius: 40,
@@ -88,7 +88,4 @@ export const styles = EStyleSheet.create({
     fontWeight: '600',
   },
 
-  activeSegmentText: {
-    color: '#000',
-  },
 });

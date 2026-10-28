@@ -24,6 +24,7 @@ import {
   RESULTS,
 } from "react-native-permissions";
 import { DatePickerField } from "../../DatePickerField";
+import { useTheme } from "../../../theme/ThemeContext";
 
 
 type Props = {
@@ -69,6 +70,8 @@ export const EditVehicleSheet =({onClose, vehicle}: Props)=> {
 
 
   const [error, setError] = useState<string>("");
+
+  const {theme} = useTheme();
 
 
   const validateForm = (): boolean => {
@@ -316,7 +319,7 @@ export const EditVehicleSheet =({onClose, vehicle}: Props)=> {
 
   return (
     <View style={styles.container}>
-      <AppText style={styles.title}>
+      <AppText style={[styles.title, {color:theme.text}]}>
         Edit vehicle
       </AppText>
 

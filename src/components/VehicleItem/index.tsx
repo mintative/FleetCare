@@ -7,6 +7,8 @@ import { styles } from "./styles";
 import { Badge } from "../Badge";
 import { vehicleStore } from "../../stores";
 import { colors } from "../../theme/colors";
+import { useTheme } from "../../theme/ThemeContext";
+
 
 type Props = {
   item: Vehicle;
@@ -14,10 +16,12 @@ type Props = {
 };
 
 export const VehicleItem = ({ item, onPress }: Props) => {
+  const {theme} = useTheme();
+
   const inspectionStatus = vehicleStore.getInspectionStatus(item.id);
   
   return (
-    <Pressable style={styles.container} onPress={()=>onPress()}>
+    <Pressable style={[styles.container, {backgroundColor:theme.card}]} onPress={()=>onPress()}>
       <View style={styles.imageContainer}>
         <Image
           source={
@@ -42,7 +46,7 @@ export const VehicleItem = ({ item, onPress }: Props) => {
         </View>
 
         <View style={styles.row}>
-          <AppText style={styles.plateNumber}>
+          <AppText style={[styles.plateNumber, {backgroundColor: theme.card}]}>
             {item.plateNumber}
           </AppText>
 

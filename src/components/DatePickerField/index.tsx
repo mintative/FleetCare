@@ -13,6 +13,7 @@ import { AppText } from "../AppText";
 import { PlainText } from "../PlainText";
 import { styles } from "./styles";
 import CrossIcon from "../../assets/icons/cross.svg";
+import { useTheme } from "../../theme/ThemeContext";
 
 type Props = {
   label: string;
@@ -64,6 +65,7 @@ export const DatePickerField = ({
   minimumDate,
 }: Props) => {
   const [showIOSPicker, setShowIOSPicker] = useState(false);
+  const {theme} = useTheme();
 
   const selectedDate = parseDate(value);
 
@@ -107,7 +109,7 @@ export const DatePickerField = ({
 
       <View style={styles.inputRow}>
         <Pressable
-          style={styles.dateButton}
+          style={[styles.dateButton, {backgroundColor:theme.background}]}
           onPress={openPicker}
           accessibilityRole="button"
           accessibilityLabel={label}
@@ -116,15 +118,13 @@ export const DatePickerField = ({
           <AppText
             style={[
               styles.dateText,
+              {color:theme.text},
               !value && styles.placeholder,
             ]}
           >
             {value ? formatDate(selectedDate) : placeholder}
           </AppText>
 
-          <AppText style={styles.calendarIcon}>
-            ▦
-          </AppText>
         </Pressable>
 
         {value && optional && (
@@ -140,7 +140,7 @@ export const DatePickerField = ({
       </View>
 
       {Platform.OS === "ios" && showIOSPicker && (
-        <View style={styles.pickerContainer}>
+        <View style={[styles.pickerContainer, {backgroundColor:theme.card}]}>
           <DateTimePicker
             value={selectedDate}
             mode="date"
@@ -153,6 +153,8 @@ export const DatePickerField = ({
                 onChange(toDateString(date));
               }
             }}
+            textColor={theme.text}
+            
           />
 
           <Pressable

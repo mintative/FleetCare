@@ -17,7 +17,7 @@ export const styles = EStyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 10,
     gap: 10,
-    backgroundColor: "#FFFFFF",
+    backgroundColor:  colors.border,
     borderWidth: 2,
     borderColor: colors.border,
     borderRadius: 50,

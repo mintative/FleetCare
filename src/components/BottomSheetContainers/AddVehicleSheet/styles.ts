@@ -1,4 +1,5 @@
 import EStyleSheet from "react-native-extended-stylesheet";
+import { colors } from "../../../theme/colors";
 
 export const styles = EStyleSheet.create({
     container: {
@@ -10,14 +11,14 @@ export const styles = EStyleSheet.create({
     title: {
         fontSize: 26,
         fontWeight: '700',
-        color: '#192235',
+
         marginBottom: 8,
     },
 
     description: {
         fontSize: 15,
         lineHeight: 22,
-        color: '#78849F',
+        color: '#666666',
         marginBottom: 28,
     },
 
@@ -60,11 +61,9 @@ export const styles = EStyleSheet.create({
     width: "100%",
     height: 190,
     borderWidth: 1,
-    borderColor: "#D1D5DB",
-    borderStyle: "dashed",
+    borderColor: colors.border,
     borderRadius: 14,
     overflow: "hidden",
-    backgroundColor: "#F9FAFB",
   },
 
   imagePlaceholder: {
@@ -77,19 +76,19 @@ export const styles = EStyleSheet.create({
   imageIcon: {
     fontSize: 32,
     marginBottom: 8,
-    color: "#6B7280",
+    color: "#666666",
   },
 
   imagePickerTitle: {
     fontSize: 16,
     fontWeight: "600",
-    color: "#374151",
+    color: "#666666",
   },
 
   imagePickerDescription: {
     marginTop: 5,
     fontSize: 13,
-    color: "#6B7280",
+    color: "#666666",
   },
 
   vehicleImage: {
@@ -110,13 +109,11 @@ export const styles = EStyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 8,
     borderRadius: 10,
-    backgroundColor: "#E5E7EB",
   },
 
   imageActionText: {
     fontSize: 13,
     fontWeight: "600",
-    color: "#374151",
   },
 
   removeImageText: {

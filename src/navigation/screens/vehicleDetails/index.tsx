@@ -15,6 +15,7 @@ import BottomSheet, { BottomSheetRef } from "../../../components/BottomSheet"
 import { useRef } from "react"
 import { EditVehicleSheet } from "../../../components/BottomSheetContainers/EditVehicleSheet/EditVehicleSheet"
 import { Vehicle } from "../../../types"
+import { useTheme } from "../../../theme/ThemeContext"
 
 
 type Props = NativeStackScreenProps<VehiclesStackParamList, "VehicleDetails">
@@ -62,6 +63,7 @@ const getStatus = (status: Vehicle["status"]) => {
 
 export const VehicleDetails = observer(({navigation, route}: Props) => {
     const sheetRef = useRef<BottomSheetRef>(null);
+    const {theme} = useTheme();
     const { vehicleId } = route.params;
     const vehicle = vehicleStore.getVehicleById(vehicleId);
 
@@ -81,7 +83,7 @@ export const VehicleDetails = observer(({navigation, route}: Props) => {
                 style={{padding:20}}
             >
                 <LinearGradient
-                            colors={["#dee3f8", "#fff"]}
+                            colors={[theme.gradient, theme.background]}
                             start={{ x: 1, y: 0 }}
                             end={{ x: 1, y: 1 }}
                             style={styles.mainContainer}
@@ -99,7 +101,7 @@ export const VehicleDetails = observer(({navigation, route}: Props) => {
                         <PlainText>{vehicle.brand.toUpperCase()}</PlainText>
                         <AppText style={{fontSize:32, fontWeight:"bold", marginTop: 5}}>{vehicle.model}</AppText>
                         <View style={styles.row}>
-                            <AppText style={styles.plateNumber}>{vehicle.plateNumber}</AppText>
+                            <AppText style={[styles.plateNumber, {backgroundColor:theme.card}]}>{vehicle.plateNumber}</AppText>
                             <Badge 
                                 title={vehicle.status.charAt(0).toUpperCase() + vehicle.status.slice(1)}
                                 type={getStatus(vehicle.status)}
@@ -108,7 +110,7 @@ export const VehicleDetails = observer(({navigation, route}: Props) => {
                     </View>
                 </LinearGradient>
 
-                <View style={styles.information}>
+                <View style={[styles.information, {backgroundColor: theme.card}]}>
                     <PlainText style={{fontWeight:"bold"}}>VEHICLE INFORMATION</PlainText>
                     <View style={styles.infoList}>
                         <View style={styles.infoRow}>
@@ -135,7 +137,7 @@ export const VehicleDetails = observer(({navigation, route}: Props) => {
                 </View>
 
 
-                <View style={styles.information}>
+                <View style={[styles.information, {backgroundColor: theme.card}]}>
                     <PlainText style={{fontWeight:"bold"}}>UPCOMING INSPECTION</PlainText>
                     <View style={{marginTop:10}}>
                         <AppText style={{fontSize:32, fontWeight:"bold"}}>{vehicle.inspectionDate?.toLocaleDateString("en-UK", {day:"2-digit", month:"short", year:"numeric"})}</AppText>

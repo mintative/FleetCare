@@ -1,5 +1,7 @@
+
 import { ReactNode } from "react"
 import { StyleProp, View, ViewStyle } from "react-native";
+import { useTheme } from "../../theme/ThemeContext";
 
 
 type Props = {
@@ -8,8 +10,10 @@ type Props = {
 }
 
 export const ScreenContainer = ({children, style}: Props) => {
+    const { theme, isDark, toggleTheme } = useTheme();
+
     return (
-        <View style={[{flex:1},style]}>
+        <View style={[{flex:1, backgroundColor: theme.background},style]}>
             {children}
         </View>
     )

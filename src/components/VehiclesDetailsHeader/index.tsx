@@ -5,6 +5,7 @@ import BackArrowIcon from "../../assets/icons/back-arrow.svg";
 import { PlainText } from "../PlainText";
 import { Vehicle } from "../../types";
 import EditIcon from "../../assets/icons/edit.svg";
+import { useTheme } from "../../theme/ThemeContext";
 
 
 type Props = {
@@ -14,8 +15,8 @@ type Props = {
 }
 
 export const VehicleDetailsHeader = ({onBackPress, onEditPress, vehicle}: Props) => {
-
-    
+    const {theme} = useTheme();
+        
 
     return (
         <View style={styles.container}>
@@ -24,7 +25,7 @@ export const VehicleDetailsHeader = ({onBackPress, onEditPress, vehicle}: Props)
                     onPress={()=>{onBackPress()}}
                     style={styles.backButton}
                 >
-                    <BackArrowIcon  width={30} height={30}/>
+                    <BackArrowIcon  width={30} height={30} color={theme.text}/>
                 </Pressable>
                 
                 <View>
@@ -36,7 +37,7 @@ export const VehicleDetailsHeader = ({onBackPress, onEditPress, vehicle}: Props)
                     onPress={()=>{onEditPress()}}
                     style={styles.editButton}
                 >
-                    <EditIcon  width={25} height={25}/>
+                    <EditIcon  width={25} height={25} color={theme.text}/>
                 </Pressable>
         </View>
     )

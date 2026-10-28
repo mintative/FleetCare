@@ -372,6 +372,15 @@ class AuthStore {
     }
   }
 
+  async toggleBiometrics(): Promise<boolean> {
+    if (this.isBiometricsEnabled) {
+      await this.disableBiometrics();
+      return false;
+    } else {
+      return await this.enableBiometrics();
+    }
+  }
+
   clearError(): void {
     this.error = null;
   }

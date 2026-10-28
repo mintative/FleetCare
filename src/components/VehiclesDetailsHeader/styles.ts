@@ -5,9 +5,7 @@ import { colors } from "../../theme/colors";
 export const styles = EStyleSheet.create({
     container: {
         padding: 10,
-        borderBottomWidth: 1,
-        borderColor: colors.border,
-        backgroundColor: "#fff",
+
 
         flexDirection: "row",
         justifyContent: "space-between"

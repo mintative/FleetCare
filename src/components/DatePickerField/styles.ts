@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../theme/colors";
 
 export const styles = StyleSheet.create({
   container: {
@@ -35,12 +36,12 @@ export const styles = StyleSheet.create({
     minHeight: 48,
     paddingHorizontal: 14,
     borderWidth: 1,
-    borderColor: "#D1D5DB",
+    borderColor: colors.border,
     borderRadius: 10,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    backgroundColor: "#FFFFFF",
+
   },
 
   dateText: {

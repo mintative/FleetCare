@@ -13,6 +13,7 @@ import {
 
 import type { ReactNode } from 'react';
 import type { BottomSheetModalMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
+import { useTheme } from '../../theme/ThemeContext';
 
 export type BottomSheetRef = {
   open: () => void;
@@ -28,6 +29,7 @@ type BottomSheetProps = {
 const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
   ({ children, snapPoints: customSnapPoints, onClose }, ref) => {
     const bottomSheetRef = useRef<BottomSheetModalMethods>(null);
+    const {theme} = useTheme();
 
     const snapPoints = useMemo(
       () => customSnapPoints ?? ['85%'],
@@ -62,6 +64,8 @@ const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
         enablePanDownToClose
         backdropComponent={renderBackdrop}
         onDismiss={onClose}
+        backgroundStyle={{backgroundColor: theme.background}}
+        handleIndicatorStyle={{ backgroundColor: theme.text }}
       >
         <BottomSheetScrollView
           style={{ flex: 1 }}

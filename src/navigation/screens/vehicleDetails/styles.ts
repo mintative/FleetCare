@@ -4,7 +4,7 @@ import { colors } from "../../../theme/colors";
 
 export const styles = EStyleSheet.create({
     mainContainer: {
-        backgroundColor: "#fff",
+
         borderRadius: 20,
     },
     image: {
@@ -20,14 +20,16 @@ export const styles = EStyleSheet.create({
     },
     plateNumber: {
         padding:10,
-        backgroundColor: "#ecebeb",
+
         alignSelf: "flex-start",
         borderRadius: 999,
         fontWeight: "bold",
+        borderWidth: 1,
+        borderColor: colors.border
         
     },
     information: {
-        backgroundColor: "#fff",
+
         borderRadius: 20,
         marginTop: 30,
         padding:20,

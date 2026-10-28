@@ -10,6 +10,7 @@ import {
   TextInputProps,
 } from 'react-native';
 import { styles } from './styles';
+import { useTheme } from '../../theme/ThemeContext';
 
 type FieldType = 'text' | 'number' | 'segmented';
 
@@ -59,6 +60,9 @@ function CustomField<T extends string = string>({
   labelStyle,
   editable = true,
 }: CustomFieldProps<T>) {
+
+  const {theme} = useTheme();
+
   const renderTextInput = () => {
     return (
       <View style={styles.inputContainer}>
@@ -73,12 +77,15 @@ function CustomField<T extends string = string>({
         }
         maxLength={maxLength}
         editable={editable}
-        style={[styles.input, inputStyle]}
+        style={[styles.input, inputStyle, {color:theme.text}]}
         underlineColorAndroid="transparent"
+        placeholderTextColor={theme.text}
+        selectionColor={theme.text}
+
       />
 
         {suffix ? (
-          <Text style={styles.suffix}>
+          <Text style={[styles.suffix, {color: theme.text}]}>
             {suffix}
           </Text>
         ) : null}
@@ -88,7 +95,7 @@ function CustomField<T extends string = string>({
   };
 
   const renderSegmented = () => (
-    <View style={styles.segmentedContainer}>
+    <View style={[styles.segmentedContainer, {backgroundColor:theme.card}]}>
       {options.map(option => {
         const isActive = value === option;
 
@@ -100,13 +107,15 @@ function CustomField<T extends string = string>({
             onPress={() => onChangeText?.(option)}
             style={[
               styles.segment,
-              isActive && styles.activeSegment,
+              
+              isActive && {backgroundColor:theme.background, color:theme.text},,
             ]}
           >
             <Text
               numberOfLines={1}
               style={[
                 styles.segmentText,
+                {color:theme.text},
                 isActive && styles.activeSegmentText,
               ]}
             >
@@ -122,7 +131,7 @@ function CustomField<T extends string = string>({
     <View style={[styles.container, containerStyle]}>
       {label ? (
         <View style={styles.labelContainer}>
-          <Text style={[styles.label, labelStyle]}>
+          <Text style={[styles.label, labelStyle, {color: theme.text}]}>
             {label}
           </Text>
 

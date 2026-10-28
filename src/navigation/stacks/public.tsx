@@ -12,7 +12,8 @@ const Stack = createNativeStackNavigator<PublicStackParamList>();
 
 export const PublicStack = observer(() => {
   return (
-    <Stack.Navigator initialRouteName="Login">
+    <Stack.Navigator initialRouteName="Login"
+    screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Login">
         {() => (
           <LoginScreen

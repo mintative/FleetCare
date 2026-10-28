@@ -33,7 +33,6 @@ export const VehiclesScreen = observer(({ navigation }: Props) => {
   
   const vehicles = vehicleStore.filteredVehicles;
 
-  authStore.logout();
 
   return (
     <ScreenContainer>

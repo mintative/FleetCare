@@ -9,7 +9,7 @@ export const styles = EStyleSheet.create({
         alignitems: "center",
     },
     title: {
-        fontSize: 28,
+        fontSize: 32,
         fontWeight: "bold"
     },
     par: {
@@ -28,9 +28,9 @@ export const styles = EStyleSheet.create({
 
     buttonText: {
         color: '#FFFFFF',
-        fontSize: 32,
+        fontSize: 38,
         fontWeight: '400',
-        lineHeight: 34,
+
         textAlign: 'center',
         includeFontPadding: false,
     },

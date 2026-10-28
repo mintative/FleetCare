@@ -19,13 +19,16 @@ import CustomField from '../../../components/CustomField';
 import ReactNativeBiometrics from 'react-native-biometrics';
 
 
+
 interface Props {
   biometricOnly?: boolean;
 }
 
 const LoginScreen = observer(({ biometricOnly = false }: Props) => {
+
   const [email, setEmail] = useState('test@example.com');
   const [password, setPassword] = useState('123456');
+  
 
 
   const handleLogin = async () => {

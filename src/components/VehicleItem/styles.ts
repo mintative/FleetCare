@@ -25,7 +25,9 @@ export const styles = EStyleSheet.create({
     },
     plateNumber: {
         padding:5,
-        backgroundColor: "#ecebeb",
+
+        borderWidth:1,
+        borderColor: colors.border,
         alignSelf: "flex-start",
         borderRadius: 999,
         fontWeight: "bold",

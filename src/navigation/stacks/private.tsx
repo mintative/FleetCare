@@ -14,18 +14,21 @@ import InspectionsIcon from '../../assets/icons/inspections.svg';
 import VehiclesIcon from '../../assets/icons/vehicles.svg';
 import MaintenanceIcon from '../../assets/icons/maintenance.svg';
 import ProfileIcon from '../../assets/icons/profile.svg';
+import { useTheme } from '../../theme/ThemeContext';
 
 const Tab = createBottomTabNavigator<PrivateTabParamList>();
 
-const COLORS = {
-  active: '#2563EB',
-  inactive: '#9CA3AF',
-  background: '#FFFFFF',
-  border: '#E5E7EB',
-};
 
 export default function PrivateTabs() {
   const insets = useSafeAreaInsets();
+  const {theme} = useTheme();
+  
+  const COLORS = {
+    active: '#2563EB',
+    inactive: '#9CA3AF',
+    background: theme.background,
+    border: theme.background,
+  };
 
   return (
     <Tab.Navigator
