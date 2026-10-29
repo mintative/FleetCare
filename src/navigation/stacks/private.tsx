@@ -4,13 +4,13 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { PrivateTabParamList } from '../types';
 
 import HomeStack from './home';
-import InspectionsStack from './inspections';
+
 import VehiclesStack from './vehicles';
 import MaintenanceStack from './maintenance';
 import ProfileStack from './profile';
 
 import HomeIcon from '../../assets/icons/home.svg';
-import InspectionsIcon from '../../assets/icons/inspections.svg';
+
 import VehiclesIcon from '../../assets/icons/vehicles.svg';
 import MaintenanceIcon from '../../assets/icons/maintenance.svg';
 import ProfileIcon from '../../assets/icons/profile.svg';
@@ -26,7 +26,7 @@ export default function PrivateTabs() {
   const COLORS = {
     active: '#2563EB',
     inactive: '#9CA3AF',
-    background: theme.background,
+    background: theme.card,
     border: theme.background,
   };
 
@@ -112,23 +112,6 @@ export default function PrivateTabs() {
           ),
         }}
       />
-      <Tab.Screen
-        name="Inspections"
-        component={InspectionsStack}
-        options={{
-          title: 'Inspections',
-          tabBarLabel: 'Inspections',
-          tabBarIcon: ({ color, focused }) => (
-            <InspectionsIcon
-              width={24}
-              height={24}
-              color={color}
-              opacity={focused ? 1 : 0.8}
-            />
-          ),
-        }}
-      />
-
       
 
       

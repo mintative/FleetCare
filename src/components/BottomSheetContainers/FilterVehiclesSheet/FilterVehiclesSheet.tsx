@@ -51,10 +51,22 @@ export const FilterVehiclesSheet =({onClose}: Props)=> {
           value={status}
           onChangeText={setStatus}
           options={[
-            'all',
-            'active',
-            'maintenance',
-            'inactive'
+            {
+              option: "all",
+              title: "All",
+            },
+            {
+              option: "active",
+              title: "Active",
+            },
+            {
+              option: "maintenance",
+              title: "Maintenance",
+            },
+            {
+              option: "inactive",
+              title: "Inactive",
+            },
           ]}
           containerStyle={styles.field}
         />

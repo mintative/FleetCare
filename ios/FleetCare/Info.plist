@@ -33,10 +33,20 @@
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>We need access to your camera to take a photo.</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>We need FaceID for safe login.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string></string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We need access to your gallery to choose a photo.</string>
 	<key>RCTNewArchEnabled</key>
 	<true/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Manrope-Regular.ttf</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -73,15 +83,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Manrope-Regular.ttf</string>
-	</array>
-	<key>NSFaceIDUsageDescription</key>
-	<string>We need FaceID for safe login.</string>
-	<key>NSCameraUsageDescription</key>
-	<string>We need access to your camera to take a photo.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>We need access to your gallery to choose a photo.</string>
 </dict>
 </plist>

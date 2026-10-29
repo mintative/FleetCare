@@ -294,7 +294,7 @@ export const AddVehicleSheet =({onClose}: Props)=> {
   }
 
   return (
-    <View style={styles.container}>
+    <BottomSheetScrollView style={styles.container}>
       <AppText style={styles.title}>
         Add vehicle
       </AppText>
@@ -456,10 +456,22 @@ export const AddVehicleSheet =({onClose}: Props)=> {
           value={fuel}
           onChangeText={setFuelType}
           options={[
-            'Petrol',
-            'Diesel',
-            'Hybrid',
-            'Electric',
+            {
+              option: "Petrol",
+              title: "Petrol"
+            },
+            {
+              option: "Diesel",
+              title: "Diesel"
+            },
+            {
+              option: "Hybrid",
+              title: "Hybrid"
+            },
+            {
+              option: "Electric",
+              title: "Electric"
+            },
           ]}
           containerStyle={styles.field}
         />
@@ -469,9 +481,18 @@ export const AddVehicleSheet =({onClose}: Props)=> {
           value={status}
           onChangeText={setStatus}
           options={[
-            'active',
-            'maintenance',
-            'inactive'
+            {
+              option: 'active',
+              title: 'Active',
+            },
+            {
+              option: 'maintenance',
+              title: "In maintenance"
+            }, 
+            {
+              option: 'inactive',
+              title: 'Inactive'
+            }
           ]}
           containerStyle={styles.field}
         />
@@ -485,6 +506,6 @@ export const AddVehicleSheet =({onClose}: Props)=> {
           </FormButton>
         </View>
 
-    </View>
+    </BottomSheetScrollView>
   );
 }

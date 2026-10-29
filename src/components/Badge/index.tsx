@@ -2,6 +2,7 @@ import { StyleProp, View, ViewStyle } from "react-native"
 import { PlainText } from "../PlainText"
 import EStyleSheet from "react-native-extended-stylesheet"
 import { colors } from "../../theme/colors";
+import { observer } from "mobx-react-lite";
 
 type Props = {
     title: string;
@@ -41,7 +42,7 @@ export const Badge = ({title, type, style}: Props) => {
           <PlainText style={[styles.statusText, {color:textColor}]}>{title}</PlainText>
         </View>
     )
-}
+};
 
 const styles = EStyleSheet.create({
     status: {
@@ -49,8 +50,8 @@ const styles = EStyleSheet.create({
         alignSelf: "flex-start",
         alignItems: "center",
         gap: 10,
-        paddingHorizontal: 16,
-        paddingVertical: 8,
+        paddingHorizontal: 10,
+        paddingVertical: 3,
         borderRadius: 24,
     },
 

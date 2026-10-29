@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { styles } from './styles';
 import { useTheme } from '../../theme/ThemeContext';
+import { AppText } from '../AppText';
 
 type FieldType = 'text' | 'number' | 'segmented';
 
@@ -26,13 +27,17 @@ interface CustomFieldProps<T extends string = string> {
   keyboardType?: TextInputProps['keyboardType'];
   maxLength?: number;
 
-  options?: readonly T[];
+  options?: {
+    option: string,
+    title: string
+  }[];
 
   containerStyle?: ViewStyle;
   inputStyle?: TextStyle;
   labelStyle?: TextStyle;
 
   editable?: boolean;
+  isTextArea?: boolean;
 }
 
 const COLORS = {
@@ -59,6 +64,7 @@ function CustomField<T extends string = string>({
   inputStyle,
   labelStyle,
   editable = true,
+  isTextArea,
 }: CustomFieldProps<T>) {
 
   const {theme} = useTheme();
@@ -79,9 +85,9 @@ function CustomField<T extends string = string>({
         editable={editable}
         style={[styles.input, inputStyle, {color:theme.text}]}
         underlineColorAndroid="transparent"
-        placeholderTextColor={theme.text}
+        placeholderTextColor={"#666666"}
         selectionColor={theme.text}
-
+        multiline={isTextArea}
       />
 
         {suffix ? (
@@ -97,18 +103,19 @@ function CustomField<T extends string = string>({
   const renderSegmented = () => (
     <View style={[styles.segmentedContainer, {backgroundColor:theme.card}]}>
       {options.map(option => {
-        const isActive = value === option;
+        const isActive = value === option.option;
 
         return (
           <TouchableOpacity
-            key={option}
+            key={option.option}
             activeOpacity={0.8}
             disabled={!editable}
-            onPress={() => onChangeText?.(option)}
+
+            onPress={() => onChangeText?.(option.option as T)}
             style={[
               styles.segment,
-              
-              isActive && {backgroundColor:theme.background, color:theme.text},,
+
+              isActive && {backgroundColor:theme.background, color:theme.text},
             ]}
           >
             <Text
@@ -119,7 +126,7 @@ function CustomField<T extends string = string>({
                 isActive && styles.activeSegmentText,
               ]}
             >
-              {option.charAt(0).toUpperCase() + option.slice(1)}
+              {option.title.charAt(0).toUpperCase() + option.title.slice(1)}
             </Text>
           </TouchableOpacity>
         );
@@ -131,12 +138,12 @@ function CustomField<T extends string = string>({
     <View style={[styles.container, containerStyle]}>
       {label ? (
         <View style={styles.labelContainer}>
-          <Text style={[styles.label, labelStyle, {color: theme.text}]}>
+          <AppText style={[styles.label, labelStyle, {color: theme.text}]}>
             {label}
-          </Text>
+          </AppText>
 
           {optional ? (
-            <Text style={styles.optional}>Optional</Text>
+            <AppText style={styles.optional}>Optional</AppText>
           ) : null}
         </View>
       ) : null}

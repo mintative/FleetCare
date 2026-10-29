@@ -14,7 +14,7 @@ import { vehicleStore } from '../../../stores';
 import { VehicleSearchBar } from '../../../components/VehicleSearchBar';
 import { FilterVehiclesSheet } from '../../../components/BottomSheetContainers/FilterVehiclesSheet/FilterVehiclesSheet';
 import { EmptyState } from '../../../components/EmptyState';
-import { authStore } from '../../../stores/AuthStore';
+
 
 type Props = NativeStackScreenProps<VehiclesStackParamList, 'VehiclesMain'>;
 

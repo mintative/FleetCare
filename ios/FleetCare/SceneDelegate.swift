@@ -2,6 +2,7 @@ import React
 import React_RCTAppDelegate
 import ReactAppDependencyProvider
 import UIKit
+import rnsplashscreen
 
 class SceneDelegate: RCTDefaultReactNativeFactoryDelegate, UIWindowSceneDelegate {
   var window: UIWindow?
@@ -35,7 +36,7 @@ class SceneDelegate: RCTDefaultReactNativeFactoryDelegate, UIWindowSceneDelegate
       connectionOptions: connectionOptions
     )
 
-   
+    RNSplashScreen.show()
   }
 
   func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {

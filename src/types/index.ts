@@ -12,10 +12,9 @@ export interface Repair {
   title: string;
   description?: string;
   priority: "low"| "medium" | "high" | "critical";
-  currentMileage: number;
-  date: string;
-  cost: number;
-  status: 'planned' | 'in_progress' | 'completed';
+  date?: string;
+  cost?: number;
+  status: 'all' | 'planned' | 'in_progress' | 'completed';
 }
 
 export type VehicleStatus =

@@ -1,9 +1,12 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
 import 'react-native-get-random-values';
 import type { Vehicle, VehicleStatus } from '../types';
 import { v4 as uuidv4 } from 'uuid';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type InspectionStatus = "ok" | "overdue" | "soon";
+
+const VEHICLES_KEY = "@vehicles_data"
 
 class VehicleStore {
   vehicles: Vehicle[] = [];
@@ -14,8 +17,40 @@ class VehicleStore {
 
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true });
+    this.loadFromStorage();
   }
 
+  private async saveToStorage() {
+    try{
+      await AsyncStorage.setItem(VEHICLES_KEY, JSON.stringify(this.vehicles))
+      return;
+    }
+    catch {
+      throw new Error("Cannot save vehicles to storage");
+    }
+    
+  }
+  private async loadFromStorage() {
+    try {
+      const data = await AsyncStorage.getItem(VEHICLES_KEY);
+      if (data) {
+        const parsed: Vehicle[] = JSON.parse(data);
+        
+
+        const formatted = parsed.map((v) => ({
+          ...v,
+          firstRegistration: v.firstRegistration ? new Date(v.firstRegistration) : undefined,
+          inspectionDate: v.inspectionDate ? new Date(v.inspectionDate) : undefined,
+        }));
+
+        runInAction(() => {
+          this.vehicles = formatted;
+        });
+      }
+    } catch {
+      console.error("Cannot load vehicles from storage");
+    }
+  }
 
   get filteredVehicles(): Vehicle[] {
     const query = this.searchQuery.trim().toLowerCase();
@@ -121,6 +156,7 @@ class VehicleStore {
     };
 
     this.vehicles.push(newVehicle);
+    this.saveToStorage();
 
     return newVehicle;
   }
@@ -137,6 +173,7 @@ class VehicleStore {
     }
 
     Object.assign(vehicle, updates);
+    this.saveToStorage();
   }
 
 
@@ -144,6 +181,7 @@ class VehicleStore {
     this.vehicles = this.vehicles.filter(
       (vehicle) => vehicle.id !== id,
     );
+    this.saveToStorage();
   }
 
 
@@ -152,16 +190,19 @@ class VehicleStore {
     status: VehicleStatus,
   ): void {
     this.updateVehicle(id, { status });
+    this.saveToStorage();
   }
 
 
   setVehicles(vehicles: Vehicle[]): void {
     this.vehicles = [...vehicles];
+    this.saveToStorage();
   }
 
 
   clearVehicles(): void {
     this.vehicles = [];
+    this.saveToStorage();
   }
 }
 

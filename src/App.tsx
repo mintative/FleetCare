@@ -13,6 +13,7 @@ import { authStore } from './stores/AuthStore';
 import { ThemeProvider, useTheme } from './theme/ThemeContext';
 import { AppStatusBar } from './components/StatusBar';
 import { LanguageProvider } from './localization/LangContext';
+import SplashScreen from 'react-native-splash-screen-newarch';
 
 EStyleSheet.build({
   $primaryColor: colors.primaryColor,
@@ -67,17 +68,31 @@ const MainContent = observer(() => {
   );
 });
 
+
 const App = observer(() => {
   const [initialized, setInitialized] = useState(false);
 
   useEffect(() => {
     let mounted = true;
 
-    authStore.initialize().finally(() => {
-      if (mounted) {
-        setInitialized(true);
+    const initializeApp = async () => {
+      try {
+        await authStore.initialize();
+      } catch (error) {
+        console.error('App initialization failed:', error);
+      } finally {
+        if (mounted) {
+          setInitialized(true);
+
+          SplashScreen.hide({
+            animation: 'fade',
+            duration: 300,
+          });
+        }
       }
-    });
+    };
+
+    initializeApp();
 
     return () => {
       mounted = false;
@@ -86,20 +101,21 @@ const App = observer(() => {
 
   if (!initialized || (authStore.isLoading && authStore.status === 'initializing')) {
     return (
-      <View style={{ flex: 1, justifyContent: 'center' }}>
-        <ActivityIndicator size="large" />
-      </View>
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: colors.primaryColor,
+        }}
+      />
     );
   }
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <ThemeProvider>
-
-          <LanguageProvider>
+        <LanguageProvider>
           <MainContent />
         </LanguageProvider>
-
       </ThemeProvider>
     </GestureHandlerRootView>
   );

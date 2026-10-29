@@ -20,6 +20,8 @@ export type VehiclesStackParamList = {
 
 export type MaintenanceStackParamList = {
   MaintenanceMain: undefined;
+  AddRepair: undefined;
+  EditRepair: {repairId: string}
 };
 
 export type ProfileStackParamList = {

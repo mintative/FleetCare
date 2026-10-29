@@ -8,7 +8,6 @@ import React, {
 import {
   BottomSheetModal as GorhomBottomSheetModal,
   BottomSheetBackdrop,
-  BottomSheetScrollView,
 } from '@gorhom/bottom-sheet';
 
 import type { ReactNode } from 'react';
@@ -29,7 +28,7 @@ type BottomSheetProps = {
 const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
   ({ children, snapPoints: customSnapPoints, onClose }, ref) => {
     const bottomSheetRef = useRef<BottomSheetModalMethods>(null);
-    const {theme} = useTheme();
+    const { theme } = useTheme();
 
     const snapPoints = useMemo(
       () => customSnapPoints ?? ['85%'],
@@ -64,17 +63,10 @@ const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>(
         enablePanDownToClose
         backdropComponent={renderBackdrop}
         onDismiss={onClose}
-        backgroundStyle={{backgroundColor: theme.background}}
+        backgroundStyle={{ backgroundColor: theme.background }}
         handleIndicatorStyle={{ backgroundColor: theme.text }}
       >
-        <BottomSheetScrollView
-          style={{ flex: 1 }}
-          contentContainerStyle={{ flexGrow: 1 }}
-          keyboardShouldPersistTaps="handled"
-          showsVerticalScrollIndicator={false}
-        >
-          {children}
-        </BottomSheetScrollView>
+        {children}
       </GorhomBottomSheetModal>
     );
   },

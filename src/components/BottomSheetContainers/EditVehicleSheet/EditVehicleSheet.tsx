@@ -25,6 +25,7 @@ import {
 } from "react-native-permissions";
 import { DatePickerField } from "../../DatePickerField";
 import { useTheme } from "../../../theme/ThemeContext";
+import { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 
 
 type Props = {
@@ -318,7 +319,7 @@ export const EditVehicleSheet =({onClose, vehicle}: Props)=> {
   }
 
   return (
-    <View style={styles.container}>
+    <BottomSheetScrollView style={styles.container}>
       <AppText style={[styles.title, {color:theme.text}]}>
         Edit vehicle
       </AppText>
@@ -484,10 +485,22 @@ export const EditVehicleSheet =({onClose, vehicle}: Props)=> {
           value={fuel}
           onChangeText={setFuelType}
           options={[
-            'Petrol',
-            'Diesel',
-            'Hybrid',
-            'Electric',
+            {
+              option: "Petrol",
+              title: "Petrol"
+            },
+            {
+              option: "Diesel",
+              title: "Diesel"
+            },
+            {
+              option: "Hybrid",
+              title: "Hybrid"
+            },
+            {
+              option: "Electric",
+              title: "Electric"
+            },
           ]}
           containerStyle={styles.field}
         />
@@ -497,9 +510,18 @@ export const EditVehicleSheet =({onClose, vehicle}: Props)=> {
           value={status}
           onChangeText={setStatus}
           options={[
-            'active',
-            'maintenance',
-            'inactive'
+            {
+              option: 'active',
+              title: 'Active',
+            },
+            {
+              option: 'maintenance',
+              title: "In maintenance"
+            }, 
+            {
+              option: 'inactive',
+              title: 'Inactive'
+            }
           ]}
           containerStyle={styles.field}
         />
@@ -513,6 +535,6 @@ export const EditVehicleSheet =({onClose, vehicle}: Props)=> {
           </FormButton>
         </View>
 
-    </View>
+    </BottomSheetScrollView>
   );
 }
