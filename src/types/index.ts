@@ -31,7 +31,7 @@ export interface Vehicle {
   mileage?: number;
   fuel: string;
   status: VehicleStatus;
-  imageUri?: string | number;
+  imageUri?: string;
   inspectionDate?: Date;
 
   VIN?: string;

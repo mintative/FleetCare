@@ -16,6 +16,7 @@ import { useRef } from "react"
 import { EditVehicleSheet } from "../../../components/BottomSheetContainers/EditVehicleSheet/EditVehicleSheet"
 import { Vehicle } from "../../../types"
 import { useTheme } from "../../../theme/ThemeContext"
+import { LOCAL_IMAGES } from "../../../services/localImages"
 
 
 type Props = NativeStackScreenProps<VehiclesStackParamList, "VehicleDetails">
@@ -67,6 +68,30 @@ export const VehicleDetails = observer(({navigation, route}: Props) => {
     const { vehicleId } = route.params;
     const vehicle = vehicleStore.getVehicleById(vehicleId);
 
+    const getImageSource = () => {
+        if(vehicle) {
+            if (!vehicle.imageUri) {
+                return require("../../../assets/images/empty.png");
+                }
+                
+            
+                if (LOCAL_IMAGES[vehicle.imageUri]) {
+                return LOCAL_IMAGES[vehicle.imageUri];
+                }
+                
+            
+                if (typeof vehicle.imageUri === "string" && (vehicle.imageUri.startsWith("http") || vehicle.imageUri.startsWith("file"))) {
+                return { uri: vehicle.imageUri };
+                }
+            
+                return require("../../../assets/images/empty.png");
+        }
+        else {
+            return;
+        }
+        
+      };
+
     if (!vehicle) {
         return (
         <ScreenContainer>
@@ -89,11 +114,7 @@ export const VehicleDetails = observer(({navigation, route}: Props) => {
                             style={styles.mainContainer}
                         >
                     <Image
-                        source={typeof vehicle.imageUri === "number"
-                        ? vehicle.imageUri
-                        : typeof vehicle.imageUri === "string" && vehicle.imageUri.length > 0
-                            ? { uri: vehicle.imageUri }
-                            : require("../../../assets/images/empty.png")}
+                        source={getImageSource()}
                         resizeMode="cover"
                         style={styles.image}
                     />

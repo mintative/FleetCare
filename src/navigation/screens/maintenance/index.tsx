@@ -19,6 +19,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import { Repair } from '../../../types';
 import { RepairItem } from '../../../components/RepairItem';
 import { colors } from '../../../theme/colors';
+import { useTheme } from '../../../theme/ThemeContext';
 
 
 type Props = NativeStackScreenProps<MaintenanceStackParamList, 'MaintenanceMain'>;
@@ -48,6 +49,8 @@ export const FILTER_TABS : FilterTab[] = [
 
 export const MaintenanceScreen = observer(({ navigation }: Props) => {
   const sheetRef = useRef<BottomSheetRef>(null);
+  const {theme} = useTheme();
+
 
 
   const selectedTab = maintenanceStore.selectedStatus;
@@ -89,11 +92,11 @@ export const MaintenanceScreen = observer(({ navigation }: Props) => {
                 return (
                   <Pressable
                     key={tab.tab}
-                    style={[styles.chip, isActive ? styles.activeChip : styles.inactiveChip]}
+                    style={[styles.chip, isActive ? styles.activeChip : [styles.inactiveChip, {backgroundColor:theme.card}]]}
                     onPress={() => setStatus(tab.tab)}
 
                   >
-                    <AppText style={[styles.chipText, isActive ? styles.activeChipText : styles.inactiveChipText]}>
+                    <AppText style={[styles.chipText, isActive ? styles.activeChipText : [styles.inactiveChipText, {color:theme.text}]]}>
                       {tab.title}
                     </AppText>
                   </Pressable>
@@ -142,10 +145,10 @@ const styles = EStyleSheet.create({
   },
   activeChip: {
     backgroundColor: colors.primaryColor,
-    borderColor: colors.border,
+
   },
   inactiveChip: {
-    backgroundColor: '#FFFFFF',
+
     borderColor: colors.border,
   },
   chipText: {

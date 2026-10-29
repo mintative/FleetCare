@@ -62,15 +62,19 @@ class MaintenanceStore {
     );
   }
   get filteredRepairsByStatus(): Repair[] {
-    if (this.selectedStatus === "all") {
-      return this.repairs;
-    }
+  const filtered = this.selectedStatus === "all"
+    ? this.repairs
+    : this.repairs.filter((repair) => repair.status === this.selectedStatus);
 
-    return this.repairs.filter(
-      (repair) =>
-        repair.status === this.selectedStatus,
-    );
-  }
+  return [...filtered].sort((a, b) => {
+
+
+    const dateA = new Date(a.date ?? 0).getTime();
+    const dateB = new Date(b.date ?? 0).getTime();
+
+    return dateB - dateA; 
+  });
+}
 
 
   get repairHistory(): Repair[] {

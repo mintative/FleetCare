@@ -10,7 +10,7 @@ export const mockVehicles: Vehicle[] = [
     mileage: 45000,
     fuel: 'Petrol',
     status: 'active',
-    imageUri: require("../assets/images/toyota.png"),
+    imageUri: 'car1',
     inspectionDate: new Date("2026-10-28"),
 
     VIN: '4T1G11AK5NU123451',
@@ -25,7 +25,7 @@ export const mockVehicles: Vehicle[] = [
     mileage: 68000,
     fuel: 'Diesel',
     status: 'maintenance',
-    imageUri: require("../assets/images/bmw.png"),
+    imageUri: 'car2',
     inspectionDate: new Date("2026-10-22"),
     
     VIN: '5UXCR6C05M9A12345',
@@ -40,7 +40,7 @@ export const mockVehicles: Vehicle[] = [
     mileage: 22000,
     fuel: 'Diesel',
     status: 'inactive',
-    imageUri: require("../assets/images/volkswagen.png"),
+    imageUri: 'car3',
     inspectionDate: new Date("2026-11-18"),
 
     VIN: '1VWBN7A35PC123456',
@@ -55,7 +55,7 @@ export const mockVehicles: Vehicle[] = [
     mileage: 12000,
     fuel: 'Hybrid',
     status: 'active',
-    imageUri: require("../assets/images/mercedes.png"),
+    imageUri: 'car4',
     inspectionDate: new Date("2026-12-28"),
 
     VIN: 'W1KZF8DB5RA123456',
@@ -70,7 +70,7 @@ export const mockVehicles: Vehicle[] = [
     mileage: 95000,
     fuel: 'Diesel',
     status: 'maintenance',
-    imageUri: require("../assets/images/skoda.png"),
+    imageUri: 'car5',
     inspectionDate: new Date("2026-10-02"),
 
     VIN: 'WAUL2AF25LN123456',

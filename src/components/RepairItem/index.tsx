@@ -64,7 +64,7 @@ export const RepairItem = observer(({ item, onPress }: Props) => {
         <AppText style={[styles.priority, {color:priorityColor}]}>{item.priority.charAt(0).toUpperCase()+ item.priority.slice(1)}</AppText>
         <PlainText style={styles.date}>{date}</PlainText>
         <Pressable style={styles.editButton} onPress={()=>onPress()}>
-          <EditIcon width={20} height={20} />
+          <EditIcon width={20} height={20} color={theme.text} />
           <AppText style={styles.editText}>Edit</AppText>
         </Pressable>
       </View>

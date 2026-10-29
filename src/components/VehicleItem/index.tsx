@@ -8,6 +8,8 @@ import { Badge } from "../Badge";
 import { vehicleStore } from "../../stores";
 import { colors } from "../../theme/colors";
 import { useTheme } from "../../theme/ThemeContext";
+import { LOCAL_IMAGES } from "../../services/localImages";
+import { observer } from "mobx-react-lite";
 
 
 type Props = {
@@ -15,22 +17,35 @@ type Props = {
   onPress: ()=>void;
 };
 
-export const VehicleItem = ({ item, onPress }: Props) => {
+
+export const VehicleItem = observer(({ item, onPress }: Props) => {
   const {theme} = useTheme();
 
   const inspectionStatus = vehicleStore.getInspectionStatus(item.id);
+
+  const getImageSource = () => {
+    if (!item.imageUri) {
+      return require("../../assets/images/empty.png");
+    }
+    
+
+    if (LOCAL_IMAGES[item.imageUri]) {
+      return LOCAL_IMAGES[item.imageUri];
+    }
+    
+
+    if (typeof item.imageUri === "string" && (item.imageUri.startsWith("http") || item.imageUri.startsWith("file"))) {
+      return { uri: item.imageUri };
+    }
+
+    return require("../../assets/images/empty.png");
+  };
   
   return (
     <Pressable style={[styles.container, {backgroundColor:theme.card}]} onPress={()=>onPress()}>
       <View style={styles.imageContainer}>
         <Image
-          source={
-            item.imageUri
-              ? typeof item.imageUri === "string"
-                ? { uri: item.imageUri }
-                : item.imageUri
-              : require("../../assets/images/empty.png")
-          }
+          source={getImageSource()}
           style={styles.image}
           resizeMode="contain"
         />
@@ -75,4 +90,4 @@ export const VehicleItem = ({ item, onPress }: Props) => {
       </View>
     </Pressable>
   );
-};
+});

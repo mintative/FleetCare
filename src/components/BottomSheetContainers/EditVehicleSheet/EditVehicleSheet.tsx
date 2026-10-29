@@ -26,6 +26,7 @@ import {
 import { DatePickerField } from "../../DatePickerField";
 import { useTheme } from "../../../theme/ThemeContext";
 import { BottomSheetScrollView } from "@gorhom/bottom-sheet";
+import { LOCAL_IMAGES } from "../../../services/localImages";
 
 
 type Props = {
@@ -53,15 +54,36 @@ export const EditVehicleSheet =({onClose, vehicle}: Props)=> {
   const [vin, setVin] = useState<string>(vehicle.VIN ?? "");
   const [fuel, setFuelType] = useState<Vehicle["fuel"]>(vehicle.fuel);
   const [status, setStatus] = useState<Vehicle["status"]>(vehicle.status);
-  const [vehicleImage, setVehicleImage] = useState<
-  Asset | { uri: string } | number | null
->(
-  vehicle.imageUri
-    ? typeof vehicle.imageUri === "number"
-      ? vehicle.imageUri
-      : { uri: vehicle.imageUri }
-    : null
-);
+  const getInitialImage = () => {
+    if (!vehicle.imageUri) return null;
+    if (LOCAL_IMAGES[vehicle.imageUri]) return LOCAL_IMAGES[vehicle.imageUri];
+    if (typeof vehicle.imageUri === "string" && (vehicle.imageUri.startsWith("http") || vehicle.imageUri.startsWith("file"))) {
+      return { uri: vehicle.imageUri };
+    }
+    return null;
+  };
+
+  const [vehicleImage, setVehicleImage] = useState<Asset | { uri: string } | number | null>(
+    getInitialImage()
+  );
+  const renderImageSource = () => {
+    if (!vehicleImage) {
+      return require("../../../assets/images/empty.png");
+    }
+    if (typeof vehicleImage === "object" && "uri" in vehicleImage && vehicleImage.uri) {
+      return { uri: vehicleImage.uri };
+    }
+    return vehicleImage;
+  };
+  const getFinalImageUri = (): string | undefined => {
+    if (!vehicleImage) return undefined;
+
+    if (typeof vehicleImage === "object" && "uri" in vehicleImage && vehicleImage.uri) {
+      return vehicleImage.uri;
+    }
+
+    return vehicle.imageUri; 
+  };
 
   const [firstRegistrationDate, setFirstRegistrationDate] =
     useState<string | null>(formatDateForPicker(vehicle.firstRegistration));
@@ -278,9 +300,8 @@ export const EditVehicleSheet =({onClose, vehicle}: Props)=> {
     return new Date(year, month - 1, day);
   };
   const editVehicle = () => {
-    if (!validateForm()) {
-      return;
-    }
+    if (!validateForm()) return;
+
     if (brand && model && plateNumber && year && fuel && status) {
       setError("");
       vehicleStore.updateVehicle(vehicle.id, {
@@ -294,29 +315,23 @@ export const EditVehicleSheet =({onClose, vehicle}: Props)=> {
         status,
         firstRegistration: toDate(firstRegistrationDate),
         inspectionDate: toDate(inspectionDate),
-
-        imageUri:vehicleImage === null
-            ? undefined
-            : typeof vehicleImage === "number"
-              ? vehicleImage
-              : vehicleImage.uri
+        imageUri: getFinalImageUri(), 
       });
+
       showMessage({
         type: "success",
         message: "Vehicle was updated",
       });
       onClose();
-      
-    }
-    else {
+    } else {
       showMessage({
         type: "danger",
         message: "Fill all fields",
-        description: "You should fill all fields"
-      })
+        description: "You should fill all fields",
+      });
       setError("Fill all fields");
     }
-  }
+  };
 
   return (
     <BottomSheetScrollView style={styles.container}>
@@ -343,16 +358,12 @@ export const EditVehicleSheet =({onClose, vehicle}: Props)=> {
         >
           {vehicleImage ? (
             <Image
-              source={
-                typeof vehicleImage === "number"
-                  ? vehicleImage
-                  : { uri: vehicleImage.uri }
-              }
-              style={styles.vehicleImage}
-              resizeMode="cover"
-            />
+            source={renderImageSource()} 
+            style={styles.vehicleImage}
+            resizeMode="cover"
+          />
           ) : (
-            <View style={styles.imagePlaceholder}>
+            <View style={[styles.imagePlaceholder, {backgroundColor:theme.card, borderColor:theme.card}]}>
               <AppText style={styles.imageIcon}>+</AppText>
 
               <AppText style={styles.imagePickerTitle}>
@@ -368,19 +379,19 @@ export const EditVehicleSheet =({onClose, vehicle}: Props)=> {
 
         <View style={styles.imageActions}>
           <Pressable
-            style={styles.imageActionButton}
+            style={[styles.imageActionButton, {backgroundColor: theme.card}]}
             onPress={takeVehiclePhoto}
           >
-            <AppText style={styles.imageActionText}>
+            <AppText style={[styles.imageActionText, {color:theme.text}]}>
               Take photo
             </AppText>
           </Pressable>
 
           <Pressable
-            style={styles.imageActionButton}
+            style={[styles.imageActionButton, {backgroundColor: theme.card}]}
             onPress={chooseVehiclePhoto}
           >
-            <AppText style={styles.imageActionText}>
+            <AppText style={[styles.imageActionText, {color:theme.text}]}>
               Choose from gallery
             </AppText>
           </Pressable>

@@ -55,7 +55,7 @@ class VehicleStore {
   get filteredVehicles(): Vehicle[] {
     const query = this.searchQuery.trim().toLowerCase();
 
-    return this.vehicles.filter((vehicle) => {
+    const filtered =  this.vehicles.filter((vehicle) => {
       const matchesSearch =
         vehicle.plateNumber.toLowerCase().includes(query) ||
         vehicle.brand.toLowerCase().includes(query) ||
@@ -66,6 +66,18 @@ class VehicleStore {
         vehicle.status === this.statusFilter;
 
       return matchesSearch && matchesStatus;
+    });
+
+    const statusPriority: Record<VehicleStatus, number> = {
+      active: 1,
+      maintenance: 2,
+      inactive: 3,
+    };
+    return [...filtered].sort((a, b) => {
+      const priorityA = statusPriority[a.status] ?? 99;
+      const priorityB = statusPriority[b.status] ?? 99;
+
+      return priorityA - priorityB;
     });
   }
 
