@@ -9,6 +9,7 @@ import { Vehicle } from "../../../types";
 import { FormButton } from "../../FormButton";
 import { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 import { showMessage } from "react-native-flash-message";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   onClose: ()=>void;
@@ -16,7 +17,7 @@ type Props = {
 
 export const FilterVehiclesSheet =({onClose}: Props)=> {
   const [status, setStatus] = useState<Vehicle["status"]|"all">(vehicleStore.statusFilter);
-    
+  const {t} = useTranslation();
 
   const [error, setError] = useState<string>("");
 
@@ -34,11 +35,11 @@ export const FilterVehiclesSheet =({onClose}: Props)=> {
       keyboardShouldPersistTaps="handled"
     >
       <AppText style={styles.title}>
-        Filter vehicles
+        {t("vehicles.filter.title")}
       </AppText>
 
       <PlainText style={styles.description}>
-        Narrow down the vehicle list.
+        {t("vehicles.filter.description")}
       </PlainText>
 
       
@@ -47,25 +48,25 @@ export const FilterVehiclesSheet =({onClose}: Props)=> {
 
         <CustomField
           type="segmented"
-          label="Status"
+          label={t("vehicles.filter.status")}
           value={status}
           onChangeText={setStatus}
           options={[
             {
               option: "all",
-              title: "All",
+              title: t("vehicles.filter.statuses.all"),
             },
             {
               option: "active",
-              title: "Active",
+              title: t("vehicles.filter.statuses.active"),
             },
             {
               option: "maintenance",
-              title: "Maintenance",
+              title: t("vehicles.filter.statuses.in_maintenance"),
             },
             {
               option: "inactive",
-              title: "Inactive",
+              title: t("vehicles.filter.statuses.inactive"),
             },
           ]}
           containerStyle={styles.field}
@@ -76,7 +77,7 @@ export const FilterVehiclesSheet =({onClose}: Props)=> {
           <FormButton
             onPress={onFitler}
           >
-            <AppText style={{color: "#fff", fontSize: 22}}>Filter</AppText>
+            <AppText style={{color: "#fff", fontSize: 22}}>{t("vehicles.filter.button")}</AppText>
           </FormButton>
         </View>
       </BottomSheetScrollView>

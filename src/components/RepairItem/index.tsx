@@ -10,7 +10,10 @@ import { colors } from "../../theme/colors";
 import { useTheme } from "../../theme/ThemeContext";
 import EditIcon from "../../assets/icons/edit.svg";
 import { observer } from "mobx-react-lite";
-import { FILTER_TABS } from "../../navigation/screens/maintenance";
+
+import { useTranslation } from "react-i18next";
+import { useMemo } from "react";
+import { useLanguage } from "../../localization/LangContext";
 
 type Props = {
   item: Repair;
@@ -18,12 +21,31 @@ type Props = {
 
 };
 
+
+
+
 export const RepairItem = observer(({ item, onPress }: Props) => {
   const {theme} = useTheme();
+  const {t} = useTranslation();
+  const {currentLanguage} = useLanguage();
+
+  const filterTabs = useMemo(() => [
+    { title: t('maintenance.filters.all'), tab: 'all' as const },
+    { title: t('maintenance.filters.planned'), tab: 'planned' as const },
+    { title: t('maintenance.filters.in_progress'), tab: 'in_progress' as const },
+    { title: t('maintenance.filters.completed'), tab: 'completed' as const },
+  ], [t]);
+
+  const priorities = useMemo(()=>[
+    {title: t('maintenance.priorities.low'), option: "low"},
+    {title: t('maintenance.priorities.medium'), option: "medium"},
+    {title: t('maintenance.priorities.high'), option: "high"},
+    {title: t('maintenance.priorities.critical'), option: "critical"},
+  ],[t])
 
 
   const vehicle = vehicleStore.getVehicleById(item.vehicleId);
-  const date = item.date ? new Date(item.date).toLocaleDateString("en-US", {
+  const date = item.date ? new Date(item.date).toLocaleDateString(currentLanguage, {
         month: "short",
         day: "2-digit",
       }) : "";
@@ -52,7 +74,7 @@ export const RepairItem = observer(({ item, onPress }: Props) => {
         </View>
 
 
-        <Badge style={{marginTop:10}} title={FILTER_TABS.find((t) => t.tab === item.status)?.title || item.status} type={item.status ==="completed" ? "success" : item.status==="in_progress" ? "warning" : "plain"} />
+        <Badge style={{marginTop:10}} title={filterTabs.find((t) => t.tab === item.status)?.title || item.status} type={item.status ==="completed" ? "success" : item.status==="in_progress" ? "warning" : "plain"} />
 
       </View>
 
@@ -61,15 +83,14 @@ export const RepairItem = observer(({ item, onPress }: Props) => {
         <PlainText style={styles.repairDescription}>{item.description}</PlainText>
       </View>
       <View style={styles.bottom}>
-        <AppText style={[styles.priority, {color:priorityColor}]}>{item.priority.charAt(0).toUpperCase()+ item.priority.slice(1)}</AppText>
+        <AppText style={[styles.priority, {color:priorityColor}]}>{priorities.find(p=>p.option===item.priority)?.title}</AppText>
         <PlainText style={styles.date}>{date}</PlainText>
         <Pressable style={styles.editButton} onPress={()=>onPress()}>
           <EditIcon width={20} height={20} color={theme.text} />
-          <AppText style={styles.editText}>Edit</AppText>
+          <AppText style={styles.editText}>{t("maintenance.editButton")}</AppText>
         </Pressable>
       </View>
       
-        
 
     </View>
   );

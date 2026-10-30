@@ -9,6 +9,7 @@ import CheckIcon from "../../../assets/icons/check.svg";
 
 import { vehicleStore } from "../../../stores";
 import { Vehicle } from "../../../types";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   onClose: () => void;
@@ -19,6 +20,7 @@ type Props = {
 export const VehicleSelectionSheet = ({ onClose, selectedVehicle, setSelectedVehicle}: Props) => {
   
   const { theme } = useTheme();
+  const {t} = useTranslation();
 
   const onChoose = (id: string) => {
     setSelectedVehicle(id);
@@ -35,7 +37,7 @@ export const VehicleSelectionSheet = ({ onClose, selectedVehicle, setSelectedVeh
         keyboardShouldPersistTaps="handled"
         ItemSeparatorComponent={<View style={{height:10}}></View>}
         ListHeaderComponent={
-          <AppText style={styles.title}>Select vehicle</AppText>
+          <AppText style={styles.title}>{t("maintenance.selectVehicle")}</AppText>
         }
         renderItem={({ item }) => {
           const isSelected = selectedVehicle === String(item.id);

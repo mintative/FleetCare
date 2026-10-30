@@ -1,21 +1,224 @@
 {
+    "bottomTabs": {
+        "home": "Strona główna",
+        "vehicles": "Pojazdy",
+        "service": "Serwis",
+        "profile": "Profil"
+    },
+    "login": {
+        "title": "Autoryzacja",
+        "lables": {
+            "email": "E-mail",
+            "password": "Hasło"
+        },
+        "loginButton": "Zaloguj się",
+        "loginWithBiometrics": "Zaloguj się za pomocą biometrii",
+        "biometricsAlert": {
+            "title": "Szybkie logowanie",
+            "description": "Czy chcesz używać Face ID / Touch ID przy następnej autoryzacji?"
+        }
+    },
     "home": {
         "welcomeMorning": "Dzień dobry",
         "welcomeAfterNoon": "Dzień dobry",
         "welcomeEvening": "Dobry wieczór",
-        "welcomeNight" : "Dobranoc",
+        "welcomeNight": "Dobranoc",
         "par": "Oto przegląd Twojej floty",
         "overview": {
-            "title": "Cała flota",
-            "vehicles": "pojazdów",
+            "title": "Flota ogółem",
+            "vehicles": "pojazdy",
             "active": "Aktywne",
             "availability": "Dostępność"
         },
         "cards": {
             "active_vehicles": "Aktywne pojazdy",
             "in_maintenance": "W serwisie",
-            "inspections_due": "Nadchodzące przeglądy",
+            "inspections_due": "Wymagane przeglądy",
             "overdue": "Zaległe"
         }
+    },
+    "vehicles": {
+        "title": "Pojazdy",
+        "description": "Zarządzaj swoją flotą",
+        "searchPlaceholder": "Szukaj według marki, modelu lub numeru rejestracyjnego",
+        "noFound": "Nie znaleziono pojazdów",
+        "noOneFound": "Nie znaleziono pojazdu",
+        "noFoundDescription": "Spróbuj zmienić kryteria wyszukiwania lub filtry.",
+        "noVehicles": "Brak pojazdów",
+        "noVehiclesDescription": "Dodaj swój pierwszy pojazd, aby zacząć zarządzać flotą.",
+        "vehicles": "pojazdy",
+        "form": {
+            "errors": {
+                "makeRequired": "Marka jest wymagana",
+                "makeRequiredDescription": "Proszę wpisać markę pojazdu.",
+                "modelRequired": "Model jest wymagany",
+                "modelRequiredDescription": "Proszę wpisać model pojazdu.",
+                "registrationRequired": "Numer rejestracyjny jest wymagany",
+                "registrationRequiredDescription": "Proszę wpisać numer rejestracyjny pojazdu.",
+                "invalidYear": "Nieprawidłowy rok",
+                "invalidYearDescription": "Wprowadź rok między 1886 a",
+                "invalidMileage": "Nieprawidłowy przebieg",
+                "invalidMileageDescription": "Przebieg musi być liczbą nieujemną.",
+                "invalidVIN": "Nieprawidłowy VIN",
+                "invalidVINDescription": "Numer VIN musi składać się z 17 poprawnych liter i cyfr.",
+                "invalidInspection": "Nieprawidłowa data przeglądu",
+                "invalidInspectionDescription": "Data przeglądu nie może być wcześniejsza niż data pierwszej rejestracji."
+            },
+            "titleAdd": "Dodaj pojazd",
+            "descriptionAdd": "Podstawowe dane — profil możesz uzupełnić później.",
+            "descriptionEdit": "Możesz edytować pojazd lub uzupełnić puste pola.",
+            "titleEdit": "Edytuj pojazd",
+            "labels": {
+                "vehiclePhoto": "Zdjęcie pojazdu",
+                "optional": "Opcjonalnie",
+                "addVehiclePhoto": "Dodaj zdjęcie pojazdu",
+                "addVehiclePhotoDescription": "Wybierz zdjęcie z galerii",
+                "takePhoto": "Zrób zdjęcie",
+                "choosePhoto": "Wybierz z galerii",
+                "removePhoto": "Usuń zdjęcie",
+                "make": "Marka",
+                "model": "Model",
+                "registration": "Numer rejestracyjny",
+                "year": "Rok",
+                "mileage": "Przebieg",
+                "mileageSuffix": "km",
+                "VIN": "VIN",
+                "firstRegistrationDate": "Data pierwszej rejestracji",
+                "selectRegistrationDate": "Wybierz datę rejestracji",
+                "inspectionDate": "Data przeglądu",
+                "selectInspectionDate": "Wybierz datę przeglądu",
+                "fuelType": "Rodzaj paliwa",
+                "fuel": {
+                    "petrol": "Benzyna",
+                    "diesel": "Diesel",
+                    "hybrid": "Hybryda",
+                    "electric": "Elektryczny"
+                },
+                "status": "Status",
+                "statuses": {
+                    "active": "Aktywny",
+                    "in_maintenance": "W serwisie",
+                    "inactive": "Nieaktywny"
+                }
+            },
+            "addButton": "Dodaj do floty",
+            "editButton": "Zaktualizuj pojazd",
+            "addMessage": "Pojazd został dodany do floty",
+            "removeMessage": "został usunięty"
+        },
+        "filter": {
+            "title": "Filtruj pojazdy",
+            "description": "Zwęż listę pojazdów.",
+            "status": "Status",
+            "statuses": {
+                "all": "Wszystkie",
+                "active": "Aktywne",
+                "in_maintenance": "W serwisie",
+                "inactive": "Nieaktywne"
+            },
+            "button": "Filtruj"
+        },
+        "details": {
+            "vehicleInformation": "Informacje o pojeździe",
+            "upcomingInspection": "Nadchodzący przegląd",
+            "repairsReport": "Raport napraw",
+            "repairsReportButton": "Zobacz raport napraw",
+            "removeButton": "Usuń pojazd"
+        }
+    },
+    "maintenance": {
+        "title": "Serwis i naprawy",
+        "description": "Śledź historię napraw i serwisu",
+        "noRepairs": "Nie znaleziono napraw",
+        "noRepairsYet": "Brak napraw",
+        "noRepairsDescription": "Spróbuj zmienić filtry",
+        "noRepairsYetDesctiption": "Dodaj pierwsze zgłoszenie naprawy.",
+        "filters": {
+            "all": "Wszystkie",
+            "planned": "Planowane",
+            "in_progress": "W trakcie",
+            "completed": "Zakończone"
+        },
+        "priorities": {
+            "low": "Niski",
+            "lowDescription": "Rutynowy — zaplanuj przy następnym serwisie",
+            "medium": "Średni",
+            "mediumDescription": "Napraw w ciągu dwóch tygodni",
+            "high": "Wysoki",
+            "highDescription": "Napraw w tym tygodniu, pojazd sprawny do użytku",
+            "critical": "Krytyczny",
+            "criticalDescription": "Niebezpieczny — wycofaj pojazd z ruchu"
+        },
+        "editButton": "Edytuj",
+        "form": {
+            "titleAdd": "Nowe zgłoszenie naprawy",
+            "titleEdit": "Edycja serwisu",
+            "descriptionAdd": "Zgłoś usterkę",
+            "lables": {
+                "vehicle": "Pojazd",
+                "vehiclePlaceholder": "Wybierz pojazd",
+                "repairTitle": "Tytuł naprawy",
+                "repairTitlePlaceholder": "Hałas hamulców na przedniej osi",
+                "repairDescription": "Opis naprawy",
+                "repairDescriptionPlaceholder": "Co się stało, kiedy się zaczęło, czy świecą się kontrolki...",
+                "priority": "Priorytet",
+                "estimatedCost": "Szacowany koszt",
+                "maintenanceDate": "Data serwisu",
+                "maintenanceDateSelect": "Wybierz datę",
+                "status": "Status",
+                "statuses": {
+                    "planned": "Planowane",
+                    "in_progress": "W trakcie",
+                    "completed": "Zakończone"
+                }
+            },
+            "addButton": "Dodaj naprawę",
+            "addMessage": "Zadanie naprawy zostało pomyślnie utworzone",
+            "editButton": "Zaktualizuj naprawę",
+            "editMessage": "Zadanie naprawy zostało pomyślnie zaktualizowane"
+        },
+        "selectVehicle": "Wybierz pojazd",
+        "selectPriority": "Priorytet serwisu",
+        "selectPriorityDescription": "Jak pilnie sprawa wymaga uwagi?",
+        "removeTitle": "Usunąć tę naprawę?"
+    },
+    "profile": {
+        "title": "Profil",
+        "role": "Menedżer",
+        "appearance": "Wygląd",
+        "themes": {
+            "light": "Jasny",
+            "dark": "Ciemny",
+            "system": "Systemowy"
+        },
+        "language": "Język",
+        "languageDescription": "Wybierz język używany w FleetCare",
+        "security": "Bezpieczeństwo",
+        "application": "Aplikacja",
+        "deviceInfo": "Informacje o urządzeniu",
+        "device": "Urządzenie",
+        "os": "System operacyjny",
+        "appVersion": "Wersja aplikacji",
+        "deviceId": "ID urządzenia",
+        "lastSync": "Ostatnia synchronizacja",
+        "networkStatus": "Stan sieci",
+        "networkType": "Typ sieci",
+        "isConnected": "Połączono",
+        "isInternetReachable": "Dostęp do Internetu",
+        "geolocation": "Geolokalizacja",
+        "latitude": "Szerokość geograficzna",
+        "longitude": "Długość geograficzna",
+        "logoutButton": "Wyloguj się",
+        "logoutTitle": "Wylogować się z FleetCare?",
+        "logoutDescription": "Musisz zalogować się ponownie, aby zobaczyć swoją flotę"
+    },
+    "common": {
+        "ok": "OK",
+        "cancel": "Anuluj",
+        "remove": "Usuń",
+        "no": "Nie, dziękuję",
+        "enable": "Włącz",
+        "optional": "Opcjonalnie",
+        "done": "Gotowe"
     }
 }

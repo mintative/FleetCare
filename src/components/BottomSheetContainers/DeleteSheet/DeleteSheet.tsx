@@ -8,6 +8,7 @@ import { Pressable, View } from "react-native";
 import BucketIcon from "../../../assets/icons/bucket.svg";
 import { colors } from "../../../theme/colors";
 import { PlainText } from "../../PlainText";
+import { useTranslation } from "react-i18next";
 
 
 type Props = {
@@ -20,6 +21,7 @@ type Props = {
 export const DeleteSheet =({onClose, onConfirm, title, description}: Props)=> {
   
   const  {theme} = useTheme();
+  const {t}  = useTranslation();
 
   const cancel = () => {
     onClose();
@@ -51,13 +53,13 @@ export const DeleteSheet =({onClose, onConfirm, title, description}: Props)=> {
             style={styles.logout}
             onPress={onConfirm}
           >
-            <AppText style={styles.logoutText}>Remove</AppText>
+            <AppText style={styles.logoutText}>{t("common.remove")}</AppText>
           </Pressable>
           <Pressable
             style={styles.cancel}
             onPress={cancel}
           >
-            <AppText style={styles.cancelText}>Cancel</AppText>
+            <AppText style={styles.cancelText}>{t("common.cancel")}</AppText>
           </Pressable>
       </View>
 

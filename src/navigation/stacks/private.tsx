@@ -17,6 +17,8 @@ import ProfileIcon from '../../assets/icons/profile.svg';
 import { useTheme } from '../../theme/ThemeContext';
 import { CopilotStep } from 'react-native-copilot';
 import { CopilotTouchableOpacity } from '../../components/Walkthroughables';
+import { useTranslation } from 'react-i18next';
+
 
 const Tab = createBottomTabNavigator<PrivateTabParamList>();
 
@@ -24,6 +26,7 @@ const Tab = createBottomTabNavigator<PrivateTabParamList>();
 export default function PrivateTabs() {
   const insets = useSafeAreaInsets();
   const {theme} = useTheme();
+  const {t} = useTranslation();
   
   const COLORS = {
     active: '#2563EB',
@@ -70,8 +73,8 @@ export default function PrivateTabs() {
         name="Home"
         component={HomeStack}
         options={{
-          title: 'Home',
-          tabBarLabel: 'Home',
+          title: t("bottomTabs.home"),
+          tabBarLabel: t("bottomTabs.home"),
           tabBarIcon: ({ color, focused }) => (
             <HomeIcon
               width={24}
@@ -101,8 +104,8 @@ export default function PrivateTabs() {
         name="Vehicles"
         component={VehiclesStack}
         options={{
-          title: 'Vehicles',
-          tabBarLabel: 'Vehicles',
+          title: t("bottomTabs.vehicles"),
+          tabBarLabel: t("bottomTabs.vehicles"),
           tabBarIcon: ({ color, focused }) => (
             <VehiclesIcon
               width={24}
@@ -132,8 +135,8 @@ export default function PrivateTabs() {
         name="Maintenance"
         component={MaintenanceStack}
         options={{
-          title: 'Maintenance',
-          tabBarLabel: 'Service',
+          title: t("bottomTabs.service"),
+          tabBarLabel: t("bottomTabs.service"),
           tabBarIcon: ({ color, focused }) => (
             <MaintenanceIcon
               width={24}
@@ -167,8 +170,8 @@ export default function PrivateTabs() {
         name="Profile"
         component={ProfileStack}
         options={{
-          title: 'Profile',
-          tabBarLabel: 'Profile',
+          title: t("bottomTabs.profile"),
+          tabBarLabel: t("bottomTabs.profile"),
           tabBarIcon: ({ color, focused }) => (
             <ProfileIcon
               width={24}

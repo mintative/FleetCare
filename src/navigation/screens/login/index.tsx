@@ -7,6 +7,7 @@ import {
   ActivityIndicator,
   Alert,
   Pressable,
+  AlertButtonStyle,
 } from 'react-native';
 import { observer } from 'mobx-react-lite';
 import { authStore } from '../../../stores/AuthStore';
@@ -17,6 +18,7 @@ import { AppText } from '../../../components/AppText';
 import { FormButton } from '../../../components/FormButton';
 import CustomField from '../../../components/CustomField';
 import ReactNativeBiometrics from 'react-native-biometrics';
+import { useTranslation } from 'react-i18next';
 
 
 
@@ -25,14 +27,14 @@ interface Props {
 }
 
 const LoginScreen = observer(({ biometricOnly = false }: Props) => {
-
+  const {t} = useTranslation();
   const [email, setEmail] = useState('test@example.com');
   const [password, setPassword] = useState('123456');
   
 
 
   const handleLogin = async () => {
-
+    
     const success = await authStore.login(email, password);
     
     if (success) {
@@ -44,12 +46,12 @@ const LoginScreen = observer(({ biometricOnly = false }: Props) => {
 
         setTimeout(() => {
           Alert.alert(
-            'Quick login',
-            'Do you want to use Face ID / Touch ID for next authorization?',
+            t("biometricsAlert.title"),
+            t("biometricsAlert.description"),
             [
-              { text: 'No, thanks', style: 'cancel' },
+              { text: t("common.no"), style: t("common.cancel") as AlertButtonStyle},
               { 
-                text: 'Enable', 
+                text: t("common.enable"), 
                 onPress: async () => {
                   await authStore.enableBiometrics();
                 } 
@@ -72,14 +74,14 @@ const LoginScreen = observer(({ biometricOnly = false }: Props) => {
   return (
     <ScreenContainer style={styles.container}>
       <AppText style={styles.title}>
-        Authorization
+        {t("login.title")}
       </AppText>
 
       {!biometricOnly && (
         <View style={{marginTop:20}}>
           <CustomField
             type="text"
-            label="Email"
+            label={t("login.lables.email")}
             value={email}
             onChangeText={setEmail}
             placeholder="Email"
@@ -88,7 +90,7 @@ const LoginScreen = observer(({ biometricOnly = false }: Props) => {
 
           <CustomField
             type="password"
-            label="Password"
+            label={t("login.lables.password")}
             value={password}
             onChangeText={setPassword}
             placeholder="********"
@@ -100,7 +102,7 @@ const LoginScreen = observer(({ biometricOnly = false }: Props) => {
             disable={authStore.isLoading}
             style={styles.button}
           >
-            <AppText style={{color: "#fff", fontSize: 22}}>Login</AppText>
+            <AppText style={{color: "#fff", fontSize: 22}}>{t("login.loginButton")}</AppText>
           </FormButton>
         </View>
       )}
@@ -113,7 +115,7 @@ const LoginScreen = observer(({ biometricOnly = false }: Props) => {
               disable={authStore.isLoading}
               style={styles.button}
             >
-              <AppText style={{color: "#fff", fontSize: 22}}>Login with biometrics</AppText>
+              <AppText style={{color: "#fff", fontSize: 22}}>{t("login.loginWithBiometrics")}</AppText>
             </FormButton>
           </View>
         )}

@@ -7,9 +7,11 @@ import BiometricsIcon from "../../assets/icons/biometrics.svg";
 import NextIcon from "../../assets/icons/next-arrow.svg";
 import { authStore } from "../../stores/AuthStore";
 import { observer } from "mobx-react-lite";
+import { useTranslation } from "react-i18next";
 
 export const SecuritySwitcher = observer(() => {
     const {theme, themeMode, setThemeMode} = useTheme();
+    const {t} = useTranslation();
 
 
     const options: ThemeMode[] = ["light", "dark", "system"];
@@ -24,7 +26,7 @@ export const SecuritySwitcher = observer(() => {
 
     return (
         <View style={styles.container}>
-            <PlainText style={styles.title}>Security</PlainText>
+            <PlainText style={styles.title}>{t("profile.security")}</PlainText>
 
             <View style={[styles.buttonContainer, {backgroundColor: theme.card}]}>
                 <View style={styles.left}>

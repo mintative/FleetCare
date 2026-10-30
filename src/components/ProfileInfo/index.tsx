@@ -6,10 +6,12 @@ import { AppText } from "../AppText";
 import { authStore } from "../../stores/AuthStore";
 import { PlainText } from "../PlainText";
 import { useTheme } from "../../theme/ThemeContext";
+import { useTranslation } from "react-i18next";
 
 
 export const ProfileInfo = () => {
     const {theme} = useTheme();
+    const {t} = useTranslation();
 
     return (
         <View style={[styles.container, {backgroundColor:theme.card}]}>
@@ -18,7 +20,7 @@ export const ProfileInfo = () => {
             </View>
             <View>
                 <AppText style={styles.email}>{authStore.user?.email}</AppText>
-                <PlainText style={styles.role}>Manager</PlainText>
+                <PlainText style={styles.role}>{t("profile.role")}</PlainText>
             </View>
         </View>
     )

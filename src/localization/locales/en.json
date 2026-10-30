@@ -1,4 +1,25 @@
 {
+    "bottomTabs": {
+        "home":"Home",
+        "vehicles": "Vehicles",
+        "service": "Service",
+        "profile": "Profile"
+    },
+    "login": {
+        "title": "Authorization",
+        "lables": {
+            "email": "Email",
+            "password": "Password"
+        
+        },
+        "loginButton": "Login",
+        "loginWithBiometrics": "Login with biometrics",
+        "biometricsAlert": {
+            "title" : "Quick login",
+            "description": "Do you want to use Face ID / Touch ID for next authorization?"
+
+        }
+    },
     "home": {
         "welcomeMorning" : "Good morning",
         "welcomeAfterNoon" : "Good afternoon",
@@ -17,5 +38,194 @@
             "inspections_due" : "Inspections Due",
             "overdue" : "Overdue"
         }
+    },
+    "vehicles": {
+        "title": "Vehicles",
+        "description": "Manage your fleet",
+        "searchPlaceholder": "Search by vehicle brand, model or  plate",
+        "noFound": "No vehicles found",
+        "noOneFound": "Vehicle not found",
+        "noFoundDescription": "Try changing your search or filters.",
+        "noVehicles" : "No vehicles yet",
+        "noVehiclesDescription": "Add your first vehicle to manage your fleet.",
+        "vehicles": "vehicles",
+        "form": {
+            "errors": {
+                "makeRequired": "Make is required",
+                "makeRequiredDescription": "Please enter the vehicle make.",
+                "modelRequired": "Model is required",
+                "modelRequiredDescription": "Please enter the vehicle model.",
+                "registrationRequired": "Registration number is required",
+                "registrationRequiredDescription": "Please enter the vehicle registration number.",
+                "invalidYear": "Invalid year",
+                "invalidYearDescription": "Enter a year between 1886 and",
+                "invalidMileage": "Invalid mileage",
+                "invalidMileageDescription": "Mileage must be a non-negative number.",
+                "invalidVIN": "Invalid VIN",
+                "invalidVINDescription": "VIN must contain 17 valid letters and numbers.",
+                "invalidInspection": "Invalid inspection date",
+                "invalidInspectionDescription" : "Inspection date cannot be earlier than the first registration date."
+            },
+            "titleAdd" : "Add vehicle",
+            "descriptionAdd" : "Basic details — you can complete the profile later.",
+            "descriptionEdit" : "You can edit a vehicle or fulfill the empty fields.",
+            "titleEdit": "Edit vehicle",
+            "labels": {
+                "vehiclePhoto": "Vehicle photo",
+                "optional": "Optional",
+                "addVehiclePhoto": "Add vehicle photo",
+                "addVehiclePhotoDescription": "Choose a photo from your gallery",
+                "takePhoto": "Take photo",
+                "choosePhoto": "Choose from gallery",
+                "removePhoto":"Remove photo",
+                "make": "Make",
+                "model": "Model",
+                "registration": "Registration number",
+                "year": "Year",
+                "mileage": "Mileage",
+                "mileageSuffix": "km",
+                "VIN": "VIN",
+                "firstRegistrationDate": "First registration Date",
+                "selectRegistrationDate": "Select registration date",
+                "inspectionDate": "Inspection date",
+                "selectInspectionDate": "Select inspection date",
+                "fuelType": "Fuel type",
+                "fuel": {
+                    "petrol": "Petrol",
+                    "diesel": "Diesel",
+                    "hybrid": "Hybrid",
+                    "electric": "Electric"
+                },
+                "status": "Status",
+                "statuses": {
+                    "active": "Active",
+                    "in_maintenance":"In Maintenance",
+                    "inactive":"Inactive"
+                }
+            },
+            "addButton": "Add to fleet",
+            "editButton": "Update vehicle",
+            "addMessage": "Vehicle was added to fleet",
+            "removeMessage": "was removed"
+        },
+        "filter": {
+            "title": "Filter vehicles",
+            "description": "Narrow down the vehicle list.",
+            "status": "Status",
+            "statuses": {
+                "all": "All",
+                "active":"Active",
+                "in_maintenance":"Maintenance",
+                "inactive":"Inactive"
+            },
+            "button": "Filter"
+        },
+        "details": {
+            "vehicleInformation": "Vehicle information",
+            "upcomingInspection": "Upcoming inspection",
+            "repairsReport": "Repairs report",
+            "repairsReportButton": "View repairs report",
+            "removeButton": "Remove vehicle"
+        }
+    },
+    "maintenance": {
+        "title": "Maintenance",
+        "description": "Track your repairs and service history",
+        "noRepairs": "No repairs found",
+        "noRepairsYet": "No repairs yet",
+        "noRepairsDescription": "Try changing your filters",
+        "noRepairsYetDesctiption": "Add your first report of repair.",
+        "filters": {
+            "all": "All",
+            "planned": "Planned",
+            "in_progress": "In progress",
+            "completed": "Completed"
+        },
+        "priorities": {
+            "low": "Low",
+            "lowDescription":"Routine - schedule at next service",
+            "medium": "Medium",
+            "mediumDescription":"Fix within two weeks",
+            "high": "High",
+            "highDescription":"Fix this week, vehicle usable",
+            "critical": "Critical",
+            "criticalDescription":"Unsafe - take vehicle off the road"
+        },
+        "editButton": "Edit",
+        "form": {
+            "titleAdd": "New Repair Request",
+            "titleEdit": "Maintenance editing",
+            "descriptionAdd": "Report an issue",
+            "lables": {
+                "vehicle": "Vehicle",
+                "vehiclePlaceholder": "Select vehicle",
+                "repairTitle": "Repair Title",
+                "repairTitlePlaceholder": "Brake noise on front axle",
+
+                "repairDescription": "Repair Description",
+                "repairDescriptionPlaceholder": "What happened, when it started, any warning lights...",
+                "priority": "Priority",
+                "estimatedCost": "Estimated Cost",
+                "maintenanceDate": "Maintenance Date",
+                "maintenanceDateSelect": "Select a date",
+                "status": "Status",
+                "statuses": {
+                    "planned": "Planned",
+                    "in_progress": "In progress",
+                    "completed": "Completed"
+                }
+            
+            },
+            "addButton": "Add repair",
+            "addMessage": "Repair task created successfully",
+            "editButton": "Update repair",
+            "editMessage": "Repair task updated successfully"
+        },
+        "selectVehicle": "Select vehicle",
+        "selectPriority": "Maintenance priority",
+        "selectPriorityDescription": "How urgently does this need attention?",
+        "removeTitle": "Remove this repair?"
+
+
+    },
+    "profile": {
+        "title": "Profile",
+        "role": "Manager",
+        "appearance": "Appearance",
+        "themes": {
+            "light": "Light",
+            "dark": "Dark",
+            "system": "System"
+        },
+        "language": "Language",
+        "languageDescription": "Choose the language used across FleetCare",
+        "security": "Security",
+        "application": "Application",
+        "deviceInfo": "Device information",
+        "device": "Device",
+        "os": "OS",
+        "appVersion": "App version",
+        "deviceId": "Device ID",
+        "lastSync": "Last sync.",
+        "networkStatus": "Network status",
+        "networkType": "Network type",
+        "isConnected": "Is connected",
+        "isInternetReachable": "Is Internet reachable",
+        "geolocation": "Geolocation",
+        "latitude": "Latitude",
+        "longitude": "Longitude",
+        "logoutButton": "Sign out",
+        "logoutTitle": "Sign out of FleetCare?",
+        "logoutDescription": "You'll need to sign in again to view your fleet"
+    },
+    "common": {
+        "ok": "OK",
+        "cancel": "Cancel",
+        "remove": "Remove",
+        "no": "No, thanks",
+        "enable": "Enable",
+        "optional": "Optional",
+        "done": "Done"
     }
+    
 }

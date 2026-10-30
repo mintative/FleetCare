@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useMemo } from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { observer } from "mobx-react-lite";
@@ -21,41 +21,10 @@ import { DatePickerField } from "../../../components/DatePickerField";
 import { FormButton } from "../../../components/FormButton";
 import { Repair } from "../../../types";
 import { DeleteSheet } from "../../../components/BottomSheetContainers/DeleteSheet/DeleteSheet";
+import { useTranslation } from "react-i18next";
 
 type Props = NativeStackScreenProps<MaintenanceStackParamList, "EditRepair">;
 export type Priority = "low" | "high" | "medium" | "critical";
-
-export const priorities: {
-  priority: Priority;
-  title: string;
-  description: string;
-  textColor: string;
-}[] = [
-  {
-    priority: "low",
-    title: "Low",
-    description: "Routine - schedule at next service",
-    textColor: colors.greenDark,
-  },
-  {
-    priority: "medium",
-    title: "Medium",
-    description: "Fix within two weeks",
-    textColor: colors.blueDark,
-  },
-  {
-    priority: "high",
-    title: "High",
-    description: "Fix this week, vehicle usable",
-    textColor: colors.orangeDark,
-  },
-  {
-    priority: "critical",
-    title: "Critical",
-    description: "Unsafe - take vehicle off the road",
-    textColor: colors.redDark,
-  },
-];
 
 const toDateString = (date: Date): string => {
   const year = date.getFullYear();
@@ -93,17 +62,45 @@ export const EditRepairScreen = observer(({ navigation, route }: Props) => {
   const prioritySelectionSheetRef = useRef<BottomSheetRef>(null);
   const deleteSheetRef = useRef<BottomSheetRef>(null);
   const { theme } = useTheme();
+  const {t} = useTranslation();
 
+
+  const priorities = useMemo(()=>[
+    {
+      priority: "low",
+      title: t("maintenance.priorities.low"),
+      description: t("maintenance.priorities.lowDescription"),
+      textColor: colors.greenDark,
+    },
+    {
+      priority: "medium",
+      title: t("maintenance.priorities.medium"),
+      description: t("maintenance.priorities.mediumDescription"),
+      textColor: colors.blueDark,
+    },
+    {
+      priority: "high",
+      title: t("maintenance.priorities.high"),
+      description: t("maintenance.priorities.highDescription"),
+      textColor: colors.orangeDark,
+    },
+    {
+      priority: "critical",
+      title: t("maintenance.priorities.critical"),
+      description: t("maintenance.priorities.criticalDescription"),
+      textColor: colors.redDark,
+    },
+  ], [t])
 
   if (!repair) {
     return (
       <ScreenContainer>
         <RepairsHeader
-          title="Maintenance editing"
+          title={t("maintenance.form.titleEdit")}
           onBackPress={() => navigation.goBack()}
         />
         <View style={{ padding: 20 }}>
-          <AppText style={{ color: theme.text }}>Repair not found</AppText>
+          <AppText style={{ color: theme.text }}>{t("maintenance.noRepairs")}</AppText>
         </View>
       </ScreenContainer>
     );
@@ -165,7 +162,7 @@ export const EditRepairScreen = observer(({ navigation, route }: Props) => {
 
       showMessage({
         type: "success",
-        message: "Repair task updated successfully",
+        message: t("maintenance.form.editMessage"),
       });
 
       navigation.goBack();
@@ -196,7 +193,7 @@ export const EditRepairScreen = observer(({ navigation, route }: Props) => {
   return (
     <ScreenContainer>
       <RepairsHeader
-        title="Maintenance editing"
+        title={t("maintenance.form.titleEdit")}
         description={repair.title}
         onBackPress={() => {
           navigation.goBack();
@@ -217,7 +214,7 @@ export const EditRepairScreen = observer(({ navigation, route }: Props) => {
             vehicleSelectionSheetRef.current?.open();
           }}
         >
-          <AppText style={styles.label}>Vehicle</AppText>
+          <AppText style={styles.label}>{t("maintenance.form.lables.vehicle")}</AppText>
           <View style={styles.selectionButton}>
             <Text
               style={[
@@ -231,7 +228,7 @@ export const EditRepairScreen = observer(({ navigation, route }: Props) => {
                   } ∙ ${
                     vehicle?.plateNumber
                   }`
-                : "Select vehicle"}
+                : t("maintenance.form.lables.vehiclePlaceholder")}
             </Text>
             <BottomArrowIcon width={20} height={20} />
           </View>
@@ -239,18 +236,18 @@ export const EditRepairScreen = observer(({ navigation, route }: Props) => {
 
         <CustomField
           type="text"
-          label="Repair Title"
+          label={t("maintenance.form.lables.repairTitle")}
           value={repairTitle}
           onChangeText={setRepairTitle}
-          placeholder="Brake noise on front axle"
+          placeholder={t("maintenance.form.lables.repairTitlePlaceholder")}
         />
 
         <CustomField
           type="text"
-          label="Repair Description"
+          label={t("maintenance.form.lables.repairDescription")}
           value={repairDescription}
           onChangeText={setRepairDescription}
-          placeholder="What happened, when it started, any warning lights..."
+          placeholder={t("maintenance.form.lables.repairDescriptionPlaceholder")}
           isTextArea={true}
           maxLength={500}
           optional
@@ -261,7 +258,7 @@ export const EditRepairScreen = observer(({ navigation, route }: Props) => {
             prioritySelectionSheetRef.current?.open();
           }}
         >
-          <AppText style={styles.label}>Priority</AppText>
+          <AppText style={styles.label}>{t("maintenance.form.lables.priority")}</AppText>
           <View style={styles.selectionButton}>
             <Text
               style={[
@@ -282,7 +279,7 @@ export const EditRepairScreen = observer(({ navigation, route }: Props) => {
 
         <CustomField
           type="text"
-          label="Estimated cost"
+          label={t("maintenance.form.lables.estimatedCost")}
           value={estimatedCost}
           onChangeText={setEstimatedCost}
           placeholder="0"
@@ -292,37 +289,37 @@ export const EditRepairScreen = observer(({ navigation, route }: Props) => {
         />
 
         <DatePickerField
-          label="Maintenance date"
+          label={t("maintenance.form.lables.maintenanceDate")}
           value={date}
           onChange={setDate}
-          placeholder="Select repair date"
+          placeholder={t("maintenance.form.lables.maintenanceDateSelect")}
           optional
         />
 
         <CustomField
           type="segmented"
-          label="Status"
+          label={t("maintenance.form.lables.status")}
           value={status}
           onChangeText={(val) => setStatus(val as Repair["status"])}
           options={[
             {
               option: "planned",
-              title: "Planned",
+              title: t("maintenance.form.lables.statuses.planned"),
             },
             {
               option: "in_progress",
-              title: "In progress",
+              title: t("maintenance.form.lables.statuses.in_progress"),
             },
             {
               option: "completed",
-              title: "Completed",
+              title: t("maintenance.form.lables.statuses.completed"),
             },
           ]}
           containerStyle={styles.field}
         />
 
         <FormButton onPress={onEdit}>
-          <AppText style={{ color: "#fff", fontSize: 22 }}>Update repair</AppText>
+          <AppText style={{ color: "#fff", fontSize: 22 }}>{t("maintenance.form.editButton")}</AppText>
         </FormButton>
       </ScrollView>
 
@@ -330,7 +327,7 @@ export const EditRepairScreen = observer(({ navigation, route }: Props) => {
                 ref={deleteSheetRef}
                 snapPoints={['35%']}
             >
-                <DeleteSheet onClose={() => deleteSheetRef.current?.close()} onConfirm={()=>{onDeleteRepair()}} title={`Remove this repair?`} />
+                <DeleteSheet onClose={() => deleteSheetRef.current?.close()} onConfirm={()=>{onDeleteRepair()}} title={t("maintenance.removeTitle")} />
             </BottomSheet>
 
       <BottomSheet ref={vehicleSelectionSheetRef} snapPoints={["90%"]}>

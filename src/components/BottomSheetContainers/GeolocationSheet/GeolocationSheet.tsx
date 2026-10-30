@@ -6,8 +6,9 @@ import { PlainText } from "../../PlainText";
 import { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 
 import { useTheme } from "../../../theme/ThemeContext";
-import { useNetInfo } from '@react-native-community/netinfo';
+
 import Geolocation from '@react-native-community/geolocation';
+import { useTranslation } from "react-i18next";
 
 type Props = {
   onClose: ()=>void;
@@ -23,9 +24,10 @@ export const GeolocationSheet =({onClose}: Props)=> {
   const [location, setLocation]  = useState<LocationState | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const netInfo = useNetInfo();
+
 
   const  {theme} = useTheme();
+  const {t} = useTranslation();
 
 
   useEffect(()=>{
@@ -89,18 +91,18 @@ export const GeolocationSheet =({onClose}: Props)=> {
       keyboardShouldPersistTaps="handled"
     >
       <AppText style={styles.title}>
-        Your geolocation
+        {t("profile.geolocation")}
       </AppText>
 
       
       {location && 
         <View style={[styles.listContainer, {backgroundColor: theme.card}]}>
           <View style={styles.item}>
-            <PlainText style={styles.leftText}>Latitude</PlainText>
+            <PlainText style={styles.leftText}>{t("profile.latitude")}</PlainText>
             <AppText style={styles.rightText}>{location.latitude}</AppText>
           </View>
           <View style={styles.item}>
-            <PlainText style={styles.leftText}>Longitude</PlainText>
+            <PlainText style={styles.leftText}>{t("profile.longitude")}</PlainText>
             <AppText style={styles.rightText}>{location.longitude}</AppText>
           </View>
         </View>

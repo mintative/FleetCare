@@ -8,6 +8,7 @@ import { useLanguage } from "../../../localization/LangContext";
 import { useTheme } from "../../../theme/ThemeContext";
 import CheckIcon from "../../../assets/icons/check.svg";
 import DeviceInfo from 'react-native-device-info';
+import { useTranslation } from "react-i18next";
 
 type Props = {
   onClose: ()=>void;
@@ -32,7 +33,7 @@ export const DeviceInfoSheet =({onClose}: Props)=> {
   
   const {currentLanguage, changeLanguage} = useLanguage();
   const  {theme} = useTheme();
-
+  const {t} = useTranslation();
 
   const [error, setError] = useState<string>("");
 
@@ -83,34 +84,34 @@ export const DeviceInfoSheet =({onClose}: Props)=> {
       keyboardShouldPersistTaps="handled"
     >
       <AppText style={styles.title}>
-        Device information
+        {t("profile.deviceInfo")}
       </AppText>
 
       
 
       <View style={[styles.listContainer, {backgroundColor: theme.card}]}>
         <View style={styles.item}>
-          <PlainText style={styles.leftText}>Device</PlainText>
+          <PlainText style={styles.leftText}>{t("profile.device")}</PlainText>
           <AppText style={styles.rightText}>{deviceDetails.deviceModel}</AppText>
         </View>
         <View style={styles.separator}></View>
         <View style={styles.item}>
-          <PlainText style={styles.leftText}>OS</PlainText>
+          <PlainText style={styles.leftText}>{t("profile.os")}</PlainText>
           <AppText style={styles.rightText}>{deviceDetails.osVersion}</AppText>
         </View>
         <View style={styles.separator}></View>
         <View style={styles.item}>
-          <PlainText style={styles.leftText}>App version</PlainText>
+          <PlainText style={styles.leftText}>{t("profile.appVersion")}</PlainText>
           <AppText style={styles.rightText}>{deviceDetails.appVersion}</AppText>
         </View>
         <View style={styles.separator}></View>
         <View style={styles.item}>
-          <PlainText style={styles.leftText}>Device ID</PlainText>
+          <PlainText style={styles.leftText}>{t("profile.deviceId")}</PlainText>
           <AppText style={styles.rightText}>{deviceDetails.shortDeviceId}</AppText>
         </View>
         <View style={styles.separator}></View>
         <View style={styles.item}>
-          <PlainText style={styles.leftText}>Last sync.</PlainText>
+          <PlainText style={styles.leftText}>{t("profile.lastSync")}</PlainText>
           <AppText style={styles.rightText}>{deviceDetails.lastSync}</AppText>
         </View>
 

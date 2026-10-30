@@ -1,21 +1,224 @@
 {
+    "bottomTabs": {
+        "home": "Головна",
+        "vehicles": "Автопарк",
+        "service": "Сервіс",
+        "profile": "Профіль"
+    },
+    "login": {
+        "title": "Авторизація",
+        "lables": {
+            "email": "Email",
+            "password": "Пароль"
+        },
+        "loginButton": "Увійти",
+        "loginWithBiometrics": "Увійти за допомогою біометрії",
+        "biometricsAlert": {
+            "title": "Швидкий вхід",
+            "description": "Бажаєте використовувати Face ID / Touch ID для наступної авторизації?"
+        }
+    },
     "home": {
         "welcomeMorning": "Доброго ранку",
         "welcomeAfterNoon": "Доброго дня",
         "welcomeEvening": "Доброго вечора",
-        "welcomeNight" : "Доброї ночі",
+        "welcomeNight": "Доброї ночі",
         "par": "Ось огляд вашого автопарку",
         "overview": {
-            "title": "Усього автопарк",
-            "vehicles": "транспортних засобів",
+            "title": "Усього авто",
+            "vehicles": "авто",
             "active": "Активні",
             "availability": "Доступність"
         },
         "cards": {
-            "active_vehicles": "Активні транспортні засоби",
-            "in_maintenance": "На технічному обслуговуванні",
-            "inspections_due": "Заплановані техогляди",
-            "overdue": "Протерміновано"
+            "active_vehicles": "Активні авто",
+            "in_maintenance": "На обслуговуванні",
+            "inspections_due": "Потрібен техогляд",
+            "overdue": "Прострочено"
         }
+    },
+    "vehicles": {
+        "title": "Транспортні засоби",
+        "description": "Керуйте своїм автопарком",
+        "searchPlaceholder": "Пошук за маркою, моделлю або номерним знаком",
+        "noFound": "Автомобілів не знайдено",
+        "noOneFound": "Автомобіль не знайдено",
+        "noFoundDescription": "Спробуйте змінити параметри пошуку або фільтри.",
+        "noVehicles": "Поки немає автомобілів",
+        "noVehiclesDescription": "Додайте свій перший транспортний засіб, щоб почати керувати автопарком.",
+        "vehicles": "авто",
+        "form": {
+            "errors": {
+                "makeRequired": "Марка є обов'язковою",
+                "makeRequiredDescription": "Будь ласка, введіть марку авто.",
+                "modelRequired": "Модель є обов'язковою",
+                "modelRequiredDescription": "Будь ласка, введіть модель авто.",
+                "registrationRequired": "Реєстраційний номер є обов'язковим",
+                "registrationRequiredDescription": "Будь ласка, введіть реєстраційний номер авто.",
+                "invalidYear": "Некоректний рік",
+                "invalidYearDescription": "Введіть рік між 1886 та",
+                "invalidMileage": "Некоректний пробіг",
+                "invalidMileageDescription": "Пробіг має бути невід'ємним числом.",
+                "invalidVIN": "Некоректний VIN",
+                "invalidVINDescription": "VIN-код повинен містити 17 коректних літер та цифр.",
+                "invalidInspection": "Некоректна дата техогляду",
+                "invalidInspectionDescription": "Дата техогляду не може бути ранішою за дату першої реєстрації."
+            },
+            "titleAdd": "Додати авто",
+            "descriptionAdd": "Базові дані — ви зможете заповнити профіль пізніше.",
+            "descriptionEdit": "Ви можете відредагувати авто або заповнити порожні поля.",
+            "titleEdit": "Редагувати авто",
+            "labels": {
+                "vehiclePhoto": "Фото авто",
+                "optional": "Необов'язково",
+                "addVehiclePhoto": "Додати фото авто",
+                "addVehiclePhotoDescription": "Оберіть фото з галереї",
+                "takePhoto": "Зробити фото",
+                "choosePhoto": "Обрати з галереї",
+                "removePhoto": "Видалити фото",
+                "make": "Марка",
+                "model": "Модель",
+                "registration": "Номерний знак",
+                "year": "Рік випуску",
+                "mileage": "Пробіг",
+                "mileageSuffix": "км",
+                "VIN": "VIN-код",
+                "firstRegistrationDate": "Дата першої реєстрації",
+                "selectRegistrationDate": "Оберіть дату реєстрації",
+                "inspectionDate": "Дата техогляду",
+                "selectInspectionDate": "Оберіть дату техогляду",
+                "fuelType": "Тип пального",
+                "fuel": {
+                    "petrol": "Бензин",
+                    "diesel": "Дизель",
+                    "hybrid": "Гібрид",
+                    "electric": "Електро"
+                },
+                "status": "Статус",
+                "statuses": {
+                    "active": "Активний",
+                    "in_maintenance": "На обслуговуванні",
+                    "inactive": "Неактивний"
+                }
+            },
+            "addButton": "Додати до автопарку",
+            "editButton": "Оновити авто",
+            "addMessage": "Автомобіль додано до автопарку",
+            "removeMessage": "видалено"
+        },
+        "filter": {
+            "title": "Фільтр авто",
+            "description": "Звузьте список автомобілів.",
+            "status": "Статус",
+            "statuses": {
+                "all": "Усі",
+                "active": "Активні",
+                "in_maintenance": "Обслуговування",
+                "inactive": "Неактивні"
+            },
+            "button": "Застосувати"
+        },
+        "details": {
+            "vehicleInformation": "Інформація про авто",
+            "upcomingInspection": "Найближчий техогляд",
+            "repairsReport": "Звіт про ремонти",
+            "repairsReportButton": "Переглянути звіт про ремонти",
+            "removeButton": "Видалити авто"
+        }
+    },
+    "maintenance": {
+        "title": "Обслуговування",
+        "description": "Відстежуйте історію ремонтів та сервісу",
+        "noRepairs": "Ремонтів не знайдено",
+        "noRepairsYet": "Ремонтів поки немає",
+        "noRepairsDescription": "Спробуйте змінити фільтри",
+        "noRepairsYetDesctiption": "Створіть перший звіт про ремонт.",
+        "filters": {
+            "all": "Усі",
+            "planned": "Заплановано",
+            "in_progress": "В процесі",
+            "completed": "Завершено"
+        },
+        "priorities": {
+            "low": "Низький",
+            "lowDescription": "Плановий — запланувати під час наступного ТО",
+            "medium": "Середній",
+            "mediumDescription": "Усунути протягом двох тижнів",
+            "high": "Високий",
+            "highDescription": "Усунути цього тижня, авто придатне до їзди",
+            "critical": "Критичний",
+            "criticalDescription": "Небезпечно — зняти авто з експлуатації"
+        },
+        "editButton": "Редагувати",
+        "form": {
+            "titleAdd": "Нова заявка на ремонт",
+            "titleEdit": "Редагування обслуговування",
+            "descriptionAdd": "Повідомити про проблему",
+            "lables": {
+                "vehicle": "Автомобіль",
+                "vehiclePlaceholder": "Оберіть авто",
+                "repairTitle": "Назва ремонту",
+                "repairTitlePlaceholder": "Шум у гальмах передньої осі",
+                "repairDescription": "Опис ремонту",
+                "repairDescriptionPlaceholder": "Що сталося, коли почалося, чи горять індикатори...",
+                "priority": "Пріоритет",
+                "estimatedCost": "Орієнтовна вартість",
+                "maintenanceDate": "Дата обслуговування",
+                "maintenanceDateSelect": "Оберіть дату",
+                "status": "Статус",
+                "statuses": {
+                    "planned": "Заплановано",
+                    "in_progress": "В процесі",
+                    "completed": "Завершено"
+                }
+            },
+            "addButton": "Додати ремонт",
+            "addMessage": "Заявку на ремонт успішно створено",
+            "editButton": "Оновити ремонт",
+            "editMessage": "Заявку на ремонт успішно оновлено"
+        },
+        "selectVehicle": "Оберіть авто",
+        "selectPriority": "Пріоритет обслуговування",
+        "selectPriorityDescription": "Наскільки терміново це потребує уваги?",
+        "removeTitle": "Видалити цей ремонт?"
+    },
+    "profile": {
+        "title": "Профіль",
+        "role": "Менеджер",
+        "appearance": "Зовнішній вигляд",
+        "themes": {
+            "light": "Світла",
+            "dark": "Темна",
+            "system": "Системна"
+        },
+        "language": "Мова",
+        "languageDescription": "Оберіть мову інтерфейсу FleetCare",
+        "security": "Безпека",
+        "application": "Додаток",
+        "deviceInfo": "Інформація про пристрій",
+        "device": "Пристрій",
+        "os": "Операційна система",
+        "appVersion": "Версія додатка",
+        "deviceId": "ID пристрою",
+        "lastSync": "Остання синхронізація",
+        "networkStatus": "Статус мережі",
+        "networkType": "Тип мережі",
+        "isConnected": "З'єднання встановлено",
+        "isInternetReachable": "Доступ до Інтернету",
+        "geolocation": "Геолокація",
+        "latitude": "Широта",
+        "longitude": "Довгота",
+        "logoutButton": "Вийти",
+        "logoutTitle": "Вийти з FleetCare?",
+        "logoutDescription": "Вам потрібно буде увійти знову, щоб переглянути автопарк"
+    },
+    "common": {
+        "ok": "ОК",
+        "cancel": "Скасувати",
+        "remove": "Видалити",
+        "no": "Ні, дякую",
+        "enable": "Увімкнути",
+        "optional": "Необов'язково",
+        "done": "Готово"
     }
 }

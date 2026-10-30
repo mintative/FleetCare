@@ -25,6 +25,7 @@ import {
 } from "react-native-permissions";
 import { DatePickerField } from "../../DatePickerField";
 import { useTheme } from "../../../theme/ThemeContext";
+import { useTranslation } from "react-i18next";
 
 
 type Props = {
@@ -52,6 +53,7 @@ export const AddVehicleSheet =({onClose}: Props)=> {
   const [error, setError] = useState<string>("");
 
   const {theme} = useTheme();
+  const {t} = useTranslation();
 
 
   const validateForm = (): boolean => {
@@ -59,8 +61,8 @@ export const AddVehicleSheet =({onClose}: Props)=> {
       setError("Enter vehicle make");
       showMessage({
         type: "danger",
-        message: "Make is required",
-        description: "Please enter the vehicle make.",
+        message: t("vehicles.form.errors.makeRequired"),
+        description: t("vehicles.form.errors.makeRequiredDescription"),
       });
       return false;
     }
@@ -69,8 +71,8 @@ export const AddVehicleSheet =({onClose}: Props)=> {
       setError("Enter vehicle model");
       showMessage({
         type: "danger",
-        message: "Model is required",
-        description: "Please enter the vehicle model.",
+        message: t("vehicles.form.errors.modelRequired"),
+        description: t("vehicles.form.errors.modelRequiredDescription"),
       });
       return false;
     }
@@ -79,8 +81,8 @@ export const AddVehicleSheet =({onClose}: Props)=> {
       setError("Enter registration number");
       showMessage({
         type: "danger",
-        message: "Registration number is required",
-        description: "Please enter the vehicle registration number.",
+        message: t("vehicles.form.errors.registrationRequired"),
+        description: t("vehicles.form.errors.registrationRequiredDescription"),
       });
       return false;
     }
@@ -97,8 +99,8 @@ export const AddVehicleSheet =({onClose}: Props)=> {
       setError("Enter a valid vehicle year");
       showMessage({
         type: "danger",
-        message: "Invalid year",
-        description: `Enter a year between 1886 and ${currentYear + 1}.`,
+        message: t("vehicles.form.errors.invalidYear"),
+        description: `${t("vehicles.form.errors.invalidYearDescription")} ${currentYear + 1}.`,
       });
       return false;
     }
@@ -110,8 +112,8 @@ export const AddVehicleSheet =({onClose}: Props)=> {
       setError("Enter a valid mileage");
       showMessage({
         type: "danger",
-        message: "Invalid mileage",
-        description: "Mileage must be a non-negative number.",
+        message: t("vehicles.form.errors.invalidMileage"),
+        description: t("vehicles.form.errors.invalidMileageDescription"),
       });
       return false;
     }
@@ -120,8 +122,8 @@ export const AddVehicleSheet =({onClose}: Props)=> {
       setError("Enter a valid VIN");
       showMessage({
         type: "danger",
-        message: "Invalid VIN",
-        description: "VIN must contain 17 valid letters and numbers.",
+        message: t("vehicles.form.errors.invalidVIN"),
+        description: t("vehicles.form.errors.invalidVINDescription"),
       });
       return false;
     }
@@ -134,9 +136,9 @@ export const AddVehicleSheet =({onClose}: Props)=> {
       setError("Invalid inspection date");
       showMessage({
         type: "danger",
-        message: "Invalid inspection date",
+        message: t("vehicles.form.errors.invalidInspection"),
         description:
-          "Inspection date cannot be earlier than the first registration date.",
+          t("vehicles.form.errors.invalidInspectionDescription"),
       });
       return false;
     }
@@ -278,7 +280,7 @@ export const AddVehicleSheet =({onClose}: Props)=> {
       });
       showMessage({
         type: "success",
-        message: "Vehicle was added to fleet",
+        message: t("vehicles.form.addMessage"),
       });
       onClose();
       
@@ -296,19 +298,19 @@ export const AddVehicleSheet =({onClose}: Props)=> {
   return (
     <BottomSheetScrollView style={styles.container}>
       <AppText style={styles.title}>
-        Add vehicle
+        {t("vehicles.form.titleAdd")}
       </AppText>
 
       <PlainText style={styles.description}>
-        Basic details — you can complete the profile later.
+        {t("vehicles.form.descriptionAdd")}
       </PlainText>
 
       <View style={styles.imageSection}>
         <View style={{flexDirection:"row", justifyContent:"space-between", paddingVertical:10}}>
           <AppText style={styles.imageLabel}>
-            Vehicle photo
+            {t("vehicles.form.labels.vehiclePhoto")}
           </AppText>
-          <PlainText style={styles.optional}>Optional</PlainText>
+          <PlainText style={styles.optional}>{t("vehicles.form.labels.optional")}</PlainText>
 
         </View>
         
@@ -327,11 +329,11 @@ export const AddVehicleSheet =({onClose}: Props)=> {
               <AppText style={styles.imageIcon}>+</AppText>
 
               <AppText style={styles.imagePickerTitle}>
-                Add vehicle photo
+                {t("vehicles.form.labels.addVehiclePhoto")}
               </AppText>
 
               <PlainText style={styles.imagePickerDescription}>
-                Choose a photo from your gallery
+                {t("vehicles.form.labels.addVehiclePhotoDescription")}
               </PlainText>
             </View>
           )}
@@ -343,7 +345,7 @@ export const AddVehicleSheet =({onClose}: Props)=> {
             onPress={takeVehiclePhoto}
           >
             <AppText style={[styles.imageActionText, {color:theme.text}]}>
-              Take photo
+              {t("vehicles.form.labels.takePhoto")}
             </AppText>
           </Pressable>
 
@@ -352,7 +354,7 @@ export const AddVehicleSheet =({onClose}: Props)=> {
             onPress={chooseVehiclePhoto}
           >
             <AppText style={[styles.imageActionText, {color:theme.text}]}>
-              Choose from gallery
+              {t("vehicles.form.labels.choosePhoto")}
             </AppText>
           </Pressable>
         </View>
@@ -360,7 +362,7 @@ export const AddVehicleSheet =({onClose}: Props)=> {
         {vehicleImage?.uri && (
           <Pressable onPress={removeVehiclePhoto}>
             <AppText style={styles.removeImageText}>
-              Remove photo
+              {t("vehicles.form.labels.removePhoto")}
             </AppText>
           </Pressable>
         )}
@@ -371,19 +373,19 @@ export const AddVehicleSheet =({onClose}: Props)=> {
         <View style={styles.row}>
           <CustomField
             type="text"
-            label="Make"
+            label={t("vehicles.form.labels.make")}
             value={brand}
             onChangeText={setMake}
-            placeholder="e.g. Ford"
+            placeholder="Ford"
             containerStyle={styles.half}
           />
 
           <CustomField
             type="text"
-            label="Model"
+            label={t("vehicles.form.labels.model")}
             value={model}
             onChangeText={setModel}
-            placeholder="e.g. Transit"
+            placeholder="Transit"
             containerStyle={styles.half}
           />
         </View>
@@ -391,7 +393,7 @@ export const AddVehicleSheet =({onClose}: Props)=> {
 
         <CustomField
           type="text"
-          label="Registration number"
+          label={t("vehicles.form.labels.registration")}
           value={plateNumber}
           onChangeText={setRegistrationNumber}
           placeholder="AB 1234 CD"
@@ -402,7 +404,7 @@ export const AddVehicleSheet =({onClose}: Props)=> {
         <View style={styles.row}>
           <CustomField
             type="number"
-            label="Year"
+            label={t("vehicles.form.labels.year")}
             value={String(year)}
             onChangeText={setYear}
             placeholder="2024"
@@ -413,7 +415,7 @@ export const AddVehicleSheet =({onClose}: Props)=> {
 
           <CustomField
             type="number"
-            label="Mileage"
+            label={t("vehicles.form.labels.mileage")}
             value={String(mileage)}
             onChangeText={setMileage}
             suffix="km"
@@ -426,7 +428,7 @@ export const AddVehicleSheet =({onClose}: Props)=> {
         
         <CustomField
           type="text"
-          label="VIN"
+          label={t("vehicles.form.labels.VIN")}
           value={vin}
           onChangeText={setVin}
           placeholder="WBACV62090LM12345"
@@ -434,64 +436,64 @@ export const AddVehicleSheet =({onClose}: Props)=> {
           optional
         />
         <DatePickerField
-          label="First registration date"
+          label={t("vehicles.form.labels.firstRegistrationDate")}
           value={firstRegistrationDate}
           onChange={setFirstRegistrationDate}
-          placeholder="Select registration date"
+          placeholder={t("vehicles.form.labels.selectRegistrationDate")}
           optional
           maximumDate={new Date()}
         />
 
         <DatePickerField
-          label="Inspection date"
+          label={t("vehicles.form.labels.inspectionDate")}
           value={inspectionDate}
           onChange={setInspectionDate}
-          placeholder="Select inspection date"
+          placeholder={t("vehicles.form.labels.selectInspectionDate")}
           optional
         />
 
         <CustomField
           type="segmented"
-          label="Fuel type"
+          label={t("vehicles.form.labels.fuelType")}
           value={fuel}
           onChangeText={setFuelType}
           options={[
             {
               option: "Petrol",
-              title: "Petrol"
+              title: t("vehicles.form.labels.fuel.petrol")
             },
             {
               option: "Diesel",
-              title: "Diesel"
+              title: t("vehicles.form.labels.fuel.diesel")
             },
             {
               option: "Hybrid",
-              title: "Hybrid"
+              title: t("vehicles.form.labels.fuel.diesel")
             },
             {
               option: "Electric",
-              title: "Electric"
+              title: t("vehicles.form.labels.fuel.electric")
             },
           ]}
           containerStyle={styles.field}
         />
         <CustomField
           type="segmented"
-          label="Status"
+          label={t("vehicles.form.labels.status")}
           value={status}
           onChangeText={setStatus}
           options={[
             {
               option: 'active',
-              title: 'Active',
+              title: t("vehicles.form.labels.statuses.active"),
             },
             {
               option: 'maintenance',
-              title: "In maintenance"
+              title: t("vehicles.form.labels.statuses.in_maintenance")
             }, 
             {
               option: 'inactive',
-              title: 'Inactive'
+              title: t("vehicles.form.labels.statuses.inactive")
             }
           ]}
           containerStyle={styles.field}
@@ -502,7 +504,7 @@ export const AddVehicleSheet =({onClose}: Props)=> {
           <FormButton
             onPress={addVehicle}
           >
-            <AppText style={{color: "#fff", fontSize: 22}}>Add to fleet</AppText>
+            <AppText style={{color: "#fff", fontSize: 22}}>{t("vehicles.form.addButton")}</AppText>
           </FormButton>
         </View>
 

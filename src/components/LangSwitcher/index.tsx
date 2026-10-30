@@ -6,6 +6,7 @@ import { PlainText } from "../PlainText";
 import LangIcon from "../../assets/icons/lang.svg";
 import NextIcon from "../../assets/icons/next-arrow.svg";
 import { useLanguage } from "../../localization/LangContext";
+import { useTranslation } from "react-i18next";
 
 type Props = {
     onPress: ()=>void;
@@ -15,6 +16,7 @@ export const LangSwitcher = ({onPress} : Props) => {
     const {theme, themeMode, setThemeMode} = useTheme();
 
     const {currentLanguage} = useLanguage();
+    const {t} = useTranslation();
 
     const options: ThemeMode[] = ["light", "dark", "system"];
 
@@ -32,14 +34,14 @@ export const LangSwitcher = ({onPress} : Props) => {
 
     return (
         <Pressable onPress={onPress} style={styles.container}>
-            <PlainText style={styles.title}>Language</PlainText>
+            <PlainText style={styles.title}>{t("profile.language")}</PlainText>
 
             <View style={[styles.buttonContainer, {backgroundColor: theme.card}]}>
                 <View style={styles.left}>
                     <View style={[styles.icon, {backgroundColor: theme.background}]}>
                         <LangIcon width={30} height={30} color={theme.text} />
                     </View>
-                    <AppText style={styles.buttonTitle}>Language</AppText>
+                    <AppText style={styles.buttonTitle}>{t("profile.language")}</AppText>
                 </View>
                 <View style={styles.right}>
                     <PlainText style={styles.lang}>{getCurrentLanguage(currentLanguage)}</PlainText>

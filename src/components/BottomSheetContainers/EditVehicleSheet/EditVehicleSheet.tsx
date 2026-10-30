@@ -27,6 +27,7 @@ import { DatePickerField } from "../../DatePickerField";
 import { useTheme } from "../../../theme/ThemeContext";
 import { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 import { LOCAL_IMAGES } from "../../../services/localImages";
+import { useTranslation } from "react-i18next";
 
 
 type Props = {
@@ -54,6 +55,9 @@ export const EditVehicleSheet =({onClose, vehicle}: Props)=> {
   const [vin, setVin] = useState<string>(vehicle.VIN ?? "");
   const [fuel, setFuelType] = useState<Vehicle["fuel"]>(vehicle.fuel);
   const [status, setStatus] = useState<Vehicle["status"]>(vehicle.status);
+
+  const {t} = useTranslation();
+
   const getInitialImage = () => {
     if (!vehicle.imageUri) return null;
     if (LOCAL_IMAGES[vehicle.imageUri]) return LOCAL_IMAGES[vehicle.imageUri];
@@ -102,8 +106,8 @@ export const EditVehicleSheet =({onClose, vehicle}: Props)=> {
       setError("Enter vehicle make");
       showMessage({
         type: "danger",
-        message: "Make is required",
-        description: "Please enter the vehicle make.",
+        message: t("vehicles.form.errors.makeRequired"),
+        description: t("vehicles.form.errors.makeRequiredDescription"),
       });
       return false;
     }
@@ -112,8 +116,8 @@ export const EditVehicleSheet =({onClose, vehicle}: Props)=> {
       setError("Enter vehicle model");
       showMessage({
         type: "danger",
-        message: "Model is required",
-        description: "Please enter the vehicle model.",
+        message: t("vehicles.form.errors.modelRequired"),
+        description: t("vehicles.form.errors.modelRequiredDescription"),
       });
       return false;
     }
@@ -122,8 +126,8 @@ export const EditVehicleSheet =({onClose, vehicle}: Props)=> {
       setError("Enter registration number");
       showMessage({
         type: "danger",
-        message: "Registration number is required",
-        description: "Please enter the vehicle registration number.",
+        message: t("vehicles.form.errors.registrationRequired"),
+        description: t("vehicles.form.errors.registrationRequiredDescription"),
       });
       return false;
     }
@@ -140,8 +144,8 @@ export const EditVehicleSheet =({onClose, vehicle}: Props)=> {
       setError("Enter a valid vehicle year");
       showMessage({
         type: "danger",
-        message: "Invalid year",
-        description: `Enter a year between 1886 and ${currentYear + 6}.`,
+        message: ("vehicles.form.errors.invalidYear"),
+        description: `${t("vehicles.form.errors.invalidYearDescription")} ${currentYear + 6}.`,
       });
       return false;
     }
@@ -153,8 +157,8 @@ export const EditVehicleSheet =({onClose, vehicle}: Props)=> {
       setError("Enter a valid mileage");
       showMessage({
         type: "danger",
-        message: "Invalid mileage",
-        description: "Mileage must be a non-negative number.",
+        message: t("vehicles.form.errors.invalidMileage"),
+        description: t("vehicles.form.errors.invalidMileageDescription"),
       });
       return false;
     }
@@ -163,8 +167,8 @@ export const EditVehicleSheet =({onClose, vehicle}: Props)=> {
       setError("Enter a valid VIN");
       showMessage({
         type: "danger",
-        message: "Invalid VIN",
-        description: "VIN must contain 17 valid letters and numbers.",
+        message: t("vehicles.form.errors.invalidVIN"),
+        description: t("vehicles.form.errors.invalidVINDescription"),
       });
       return false;
     }
@@ -177,9 +181,9 @@ export const EditVehicleSheet =({onClose, vehicle}: Props)=> {
       setError("Invalid inspection date");
       showMessage({
         type: "danger",
-        message: "Invalid inspection date",
+        message: t("vehicles.form.errors.invalidInspection"),
         description:
-          "Inspection date cannot be earlier than the first registration date.",
+          t("vehicles.form.errors.invalidInspectionDescription"),
       });
       return false;
     }
@@ -336,19 +340,19 @@ export const EditVehicleSheet =({onClose, vehicle}: Props)=> {
   return (
     <BottomSheetScrollView style={styles.container}>
       <AppText style={[styles.title, {color:theme.text}]}>
-        Edit vehicle
+        {t("vehicles.form.titleEdit")}
       </AppText>
 
       <PlainText style={styles.description}>
-        You can edit a vehicle or fulfill the empty fields.
+        {t("vehicles.form.descriptionEdit")}
       </PlainText>
 
       <View style={styles.imageSection}>
         <View style={{flexDirection:"row", justifyContent:"space-between", paddingVertical:10}}>
           <AppText style={styles.imageLabel}>
-            Vehicle photo
+            {t("vehicles.form.labels.vehiclePhoto")}
           </AppText>
-          <PlainText style={styles.optional}>Optional</PlainText>
+          <PlainText style={styles.optional}>{t("vehicles.form.labels.optional")}</PlainText>
 
         </View>
         
@@ -367,11 +371,11 @@ export const EditVehicleSheet =({onClose, vehicle}: Props)=> {
               <AppText style={styles.imageIcon}>+</AppText>
 
               <AppText style={styles.imagePickerTitle}>
-                Add vehicle photo
+                {t("vehicles.form.labels.addVehiclePhoto")}
               </AppText>
 
               <PlainText style={styles.imagePickerDescription}>
-                Choose a photo from your gallery
+                {t("vehicles.form.labels.addVehiclePhotoDescription")}
               </PlainText>
             </View>
           )}
@@ -383,7 +387,7 @@ export const EditVehicleSheet =({onClose, vehicle}: Props)=> {
             onPress={takeVehiclePhoto}
           >
             <AppText style={[styles.imageActionText, {color:theme.text}]}>
-              Take photo
+              {t("vehicles.form.labels.takePhoto")}
             </AppText>
           </Pressable>
 
@@ -392,7 +396,7 @@ export const EditVehicleSheet =({onClose, vehicle}: Props)=> {
             onPress={chooseVehiclePhoto}
           >
             <AppText style={[styles.imageActionText, {color:theme.text}]}>
-              Choose from gallery
+              {t("vehicles.form.labels.choosePhoto")}
             </AppText>
           </Pressable>
         </View>
@@ -400,7 +404,7 @@ export const EditVehicleSheet =({onClose, vehicle}: Props)=> {
         {vehicleImage && (
           <Pressable onPress={removeVehiclePhoto}>
             <AppText style={styles.removeImageText}>
-              Remove photo
+              {t("vehicles.form.labels.removePhoto")}
             </AppText>
           </Pressable>
         )}
@@ -411,7 +415,7 @@ export const EditVehicleSheet =({onClose, vehicle}: Props)=> {
         <View style={styles.row}>
           <CustomField
             type="text"
-            label="Make"
+            label={t("vehicles.form.labels.make")}
             value={brand}
             onChangeText={setMake}
             placeholder="e.g. Ford"
@@ -420,7 +424,7 @@ export const EditVehicleSheet =({onClose, vehicle}: Props)=> {
 
           <CustomField
             type="text"
-            label="Model"
+            label={t("vehicles.form.labels.model")}
             value={model}
             onChangeText={setModel}
             placeholder="e.g. Transit"
@@ -431,7 +435,7 @@ export const EditVehicleSheet =({onClose, vehicle}: Props)=> {
 
         <CustomField
           type="text"
-          label="Registration number"
+          label={t("vehicles.form.labels.registration")}
           value={plateNumber}
           onChangeText={setRegistrationNumber}
           placeholder="AB 1234 CD"
@@ -442,7 +446,7 @@ export const EditVehicleSheet =({onClose, vehicle}: Props)=> {
         <View style={styles.row}>
           <CustomField
             type="number"
-            label="Year"
+            label={t("vehicles.form.labels.year")}
             value={String(year)}
             onChangeText={setYear}
             placeholder="2024"
@@ -453,7 +457,7 @@ export const EditVehicleSheet =({onClose, vehicle}: Props)=> {
 
           <CustomField
             type="number"
-            label="Mileage"
+            label={t("vehicles.form.labels.mileage")}
             value={String(mileage)}
             onChangeText={setMileage}
             suffix="km"
@@ -466,7 +470,7 @@ export const EditVehicleSheet =({onClose, vehicle}: Props)=> {
         
         <CustomField
           type="text"
-          label="VIN"
+          label={t("vehicles.form.labels.VIN")}
           value={vin}
           onChangeText={setVin}
           placeholder="WBACV62090LM12345"
@@ -474,7 +478,7 @@ export const EditVehicleSheet =({onClose, vehicle}: Props)=> {
           optional
         />
         <DatePickerField
-          label="First registration date"
+          label={t("vehicles.form.labels.firstRegistrationDate")}
           value={firstRegistrationDate}
           onChange={setFirstRegistrationDate}
           placeholder="Select registration date"
@@ -483,34 +487,34 @@ export const EditVehicleSheet =({onClose, vehicle}: Props)=> {
         />
 
         <DatePickerField
-          label="Inspection date"
+          label={t("vehicles.form.labels.inspectionDate")}
           value={inspectionDate}
           onChange={setInspectionDate}
-          placeholder="Select inspection date"
+          placeholder={t("vehicles.form.labels.selectInspectionDate")}
           optional
         />
 
         <CustomField
           type="segmented"
-          label="Fuel type"
+          label={t("vehicles.form.labels.fuelType")}
           value={fuel}
           onChangeText={setFuelType}
           options={[
             {
               option: "Petrol",
-              title: "Petrol"
+              title: t("vehicles.form.labels.fuel.petrol")
             },
             {
               option: "Diesel",
-              title: "Diesel"
+              title: t("vehicles.form.labels.fuel.diesel")
             },
             {
               option: "Hybrid",
-              title: "Hybrid"
+              title: t("vehicles.form.labels.fuel.hybrid")
             },
             {
               option: "Electric",
-              title: "Electric"
+              title: t("vehicles.form.labels.fuel.electric")
             },
           ]}
           containerStyle={styles.field}
@@ -523,15 +527,15 @@ export const EditVehicleSheet =({onClose, vehicle}: Props)=> {
           options={[
             {
               option: 'active',
-              title: 'Active',
+              title: t("vehicles.form.labels.statuses.active"),
             },
             {
               option: 'maintenance',
-              title: "In maintenance"
+              title: t("vehicles.form.labels.statuses.in_maintenance")
             }, 
             {
               option: 'inactive',
-              title: 'Inactive'
+              title: t("vehicles.form.labels.statuses.inactive")
             }
           ]}
           containerStyle={styles.field}
@@ -542,7 +546,7 @@ export const EditVehicleSheet =({onClose, vehicle}: Props)=> {
           <FormButton
             onPress={editVehicle}
           >
-            <AppText style={{color: "#fff", fontSize: 22}}>Update vehicle</AppText>
+            <AppText style={{color: "#fff", fontSize: 22}}>{t("vehicles.form.editButton")}</AppText>
           </FormButton>
         </View>
 

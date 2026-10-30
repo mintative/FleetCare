@@ -14,6 +14,7 @@ import { PlainText } from "../PlainText";
 import { styles } from "./styles";
 import CrossIcon from "../../assets/icons/cross.svg";
 import { useTheme } from "../../theme/ThemeContext";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   label: string;
@@ -66,6 +67,7 @@ export const DatePickerField = ({
 }: Props) => {
   const [showIOSPicker, setShowIOSPicker] = useState(false);
   const {theme} = useTheme();
+  const {t} = useTranslation();
 
   const selectedDate = parseDate(value);
 
@@ -102,7 +104,7 @@ export const DatePickerField = ({
 
         {optional && (
           <PlainText style={styles.optional}>
-            Optional
+            {t("common.optional")}
           </PlainText>
         )}
       </View>
@@ -162,7 +164,7 @@ export const DatePickerField = ({
             onPress={() => setShowIOSPicker(false)}
           >
             <AppText style={styles.doneText}>
-              Done
+              {t("common.done")}
             </AppText>
           </Pressable>
         </View>

@@ -17,6 +17,7 @@ import { DeviceInfoSheet } from '../../../components/BottomSheetContainers/Devic
 import { LogoutSheet } from '../../../components/BottomSheetContainers/LogoutSheet/LogoutSheet';
 import { NetworkInfoSheet } from '../../../components/BottomSheetContainers/NetworkInfoSheet/NetworkInfoSheet';
 import { GeolocationSheet } from '../../../components/BottomSheetContainers/GeolocationSheet/GeolocationSheet';
+import { useTranslation } from 'react-i18next';
 
 
 
@@ -29,11 +30,13 @@ export default function ProfileScreen({ navigation }: Props) {
   const geolocationSheetRef = useRef<BottomSheetRef>(null);
   const logoutSheetRef = useRef<BottomSheetRef>(null);
 
+  const {t} = useTranslation();
+
   return (
     <ScreenContainer>
       <ScrollView contentContainerStyle={{padding:20}} style={{}}>
         <Header 
-            title="Profile"
+            title={t("profile.title")}
         />
         <ProfileInfo/>
         <ThemeSwitcher />

@@ -1,14 +1,14 @@
 import { FlatList, Pressable, ScrollView, View } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { useDeferredValue, useEffect, useRef, useState } from 'react';
+import { useMemo } from 'react';
 import { observer } from 'mobx-react-lite';
 
 import type { MaintenanceStackParamList } from '../../types';
 import { ScreenContainer } from '../../../components/ScreenContainer';
 import { Header } from '../../../components/Header';
-import BottomSheet, { BottomSheetRef } from '../../../components/BottomSheet';
-import { AddVehicleSheet } from '../../../components/BottomSheetContainers/AddVehicleSheet/AddVehicleSheet';
-import { VehicleItem } from '../../../components/VehicleItem';
+
+
+
 
 import { maintenanceStore} from '../../../stores';
 
@@ -20,6 +20,7 @@ import { Repair } from '../../../types';
 import { RepairItem } from '../../../components/RepairItem';
 import { colors } from '../../../theme/colors';
 import { useTheme } from '../../../theme/ThemeContext';
+import { useTranslation } from 'react-i18next';
 
 
 type Props = NativeStackScreenProps<MaintenanceStackParamList, 'MaintenanceMain'>;
@@ -29,27 +30,18 @@ type FilterTab = {
   tab: Repair["status"];
 }
 
-export const FILTER_TABS : FilterTab[] = [
-  {
-    title: "All",
-    tab: "all"
-  },
-{
-    title: "Planned",
-    tab: "planned"
-  },
-{
-    title: "In progress",
-    tab: "in_progress"
-  },
-{
-    title: "Completed",
-    tab: "completed"
-  }];
 
 export const MaintenanceScreen = observer(({ navigation }: Props) => {
-  const sheetRef = useRef<BottomSheetRef>(null);
+
   const {theme} = useTheme();
+  const {t} = useTranslation();
+
+  const filterTabs : FilterTab[] = useMemo(() => [
+    { title: t('maintenance.filters.all'), tab: 'all' as const },
+    { title: t('maintenance.filters.planned'), tab: 'planned' as const },
+    { title: t('maintenance.filters.in_progress'), tab: 'in_progress' as const },
+    { title: t('maintenance.filters.completed'), tab: 'completed' as const },
+  ], [t]);
 
 
 
@@ -76,8 +68,8 @@ export const MaintenanceScreen = observer(({ navigation }: Props) => {
         ListHeaderComponent={
           <View style={{marginBottom:30}}>
             <Header
-              title="Maintenance"
-              par="Track repairs and service history"
+              title={t("maintenance.title")}
+              par={t("maintenance.description")}
               onAddPress={()=>{navigation.navigate("AddRepair")}}
               style={{padding:20}}
             />
@@ -87,7 +79,7 @@ export const MaintenanceScreen = observer(({ navigation }: Props) => {
               showsHorizontalScrollIndicator={false}
               contentContainerStyle={styles.filterContainer}
             >
-              {FILTER_TABS.map((tab) => {
+              {filterTabs.map((tab) => {
                 const isActive = selectedTab === tab.tab;
                 return (
                   <Pressable
@@ -108,23 +100,17 @@ export const MaintenanceScreen = observer(({ navigation }: Props) => {
         }
         ListEmptyComponent={
           <EmptyState
-            title={selectedTab ? 'No repairs found' : 'No repairs yet'}
+            title={selectedTab ? t("maintenance.noRepairs") : t("maintenance.noRepairsYet")}
             description={
               selectedTab
-                ? 'Try changing your filters.'
-                : 'Add your first report of repair.'
+                ? t("maintenance.noRepairsDescription")
+                : t("maintenance.noRepairsYetDescription")
             }
             style={{marginHorizontal:20}}
           />
         }
       />
 
-      <BottomSheet
-        ref={sheetRef}
-        snapPoints={['90%']}
-      >
-        <AddVehicleSheet onClose={() => sheetRef.current?.close()} />
-      </BottomSheet>
     </ScreenContainer>
   );
 });

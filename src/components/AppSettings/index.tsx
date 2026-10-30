@@ -7,6 +7,7 @@ import PhoneIcon from "../../assets/icons/phone.svg";
 import NextIcon from "../../assets/icons/next-arrow.svg";
 import NetworkIcon from "../../assets/icons/wifi.svg";
 import GeolocationIcon from "../../assets/icons/geolocation.svg";
+import { useTranslation } from "react-i18next";
 
 type Props = {
     onDeviceInfoPress: ()=>void;
@@ -16,21 +17,21 @@ type Props = {
 
 export const AppSettings = ({onDeviceInfoPress,onNetworkInfoPress, onGeolocationPress }: Props) => {
     const {theme, themeMode, setThemeMode} = useTheme();
-
+    const {t} = useTranslation();
 
 
 
     return (
         
         <View  style={styles.container}>
-            <PlainText style={styles.title}>Application</PlainText>
+            <PlainText style={styles.title}>{t("profile.application")}</PlainText>
 
             <Pressable onPress={onDeviceInfoPress} style={[styles.buttonContainer, {backgroundColor: theme.card}]}>
                 <View style={styles.left}>
                     <View style={[styles.icon, {backgroundColor: theme.background}]}>
                         <PhoneIcon width={25} height={25} color={theme.text} />
                     </View>
-                    <AppText style={styles.buttonTitle}>Device information</AppText>
+                    <AppText style={styles.buttonTitle}>{t("profile.deviceInfo")}</AppText>
                 </View>
                 <View style={styles.right}>
 
@@ -44,7 +45,7 @@ export const AppSettings = ({onDeviceInfoPress,onNetworkInfoPress, onGeolocation
                     <View style={[styles.icon, {backgroundColor: theme.background}]}>
                         <NetworkIcon width={25} height={25} color={theme.text} />
                     </View>
-                    <AppText style={styles.buttonTitle}>Network status</AppText>
+                    <AppText style={styles.buttonTitle}>{t("profile.networkStatus")}</AppText>
                 </View>
                 <View style={styles.right}>
 
@@ -58,7 +59,7 @@ export const AppSettings = ({onDeviceInfoPress,onNetworkInfoPress, onGeolocation
                     <View style={[styles.icon, {backgroundColor: theme.background}]}>
                         <GeolocationIcon width={25} height={25} color={theme.text} />
                     </View>
-                    <AppText style={styles.buttonTitle}>Geolocation</AppText>
+                    <AppText style={styles.buttonTitle}>{t("profile.geolocation")}</AppText>
                 </View>
                 <View style={styles.right}>
                     <View>

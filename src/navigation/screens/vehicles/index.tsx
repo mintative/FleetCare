@@ -14,6 +14,7 @@ import { vehicleStore } from '../../../stores';
 import { VehicleSearchBar } from '../../../components/VehicleSearchBar';
 import { FilterVehiclesSheet } from '../../../components/BottomSheetContainers/FilterVehiclesSheet/FilterVehiclesSheet';
 import { EmptyState } from '../../../components/EmptyState';
+import { useTranslation } from 'react-i18next';
 
 
 type Props = NativeStackScreenProps<VehiclesStackParamList, 'VehiclesMain'>;
@@ -22,6 +23,7 @@ export const VehiclesScreen = observer(({ navigation }: Props) => {
   const sheetRef = useRef<BottomSheetRef>(null);
   const filterSheetRef = useRef<BottomSheetRef>(null);
   const [value, setValue] = useState<string>("");
+  const {t} = useTranslation();
 
 
 
@@ -45,7 +47,7 @@ export const VehiclesScreen = observer(({ navigation }: Props) => {
         ListHeaderComponent={
           <View style={{marginBottom:30}}>
             <Header
-              title="Vehicles"
+              title={t("vehicles.title")}
               par="Manage your fleet"
               onAddPress={() => sheetRef.current?.open()}
             />
@@ -57,17 +59,17 @@ export const VehiclesScreen = observer(({ navigation }: Props) => {
             />
 
             <PlainText style={{marginTop:20}}>
-              {vehicleStore.totalVehicles} vehicles
+              {vehicleStore.totalVehicles} {t("vehicles.vehicles")}
             </PlainText>
           </View>
         }
         ListEmptyComponent={
           <EmptyState
-            title={value ? 'No vehicles found' : 'No vehicles yet'}
+            title={value ? t("vehicles.noFound") : t("vehicles.noVehicles")}
             description={
               value
-                ? 'Try changing your search or filters.'
-                : 'Add your first vehicle to manage your fleet.'
+                ? t("vehicles.noFoundDescription")
+                : t("vehicles.noVehiclesDescription")
             }
           />
         }

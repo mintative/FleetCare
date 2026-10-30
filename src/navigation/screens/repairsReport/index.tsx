@@ -1,17 +1,25 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { WebView } from 'react-native-webview';
 import { VehiclesStackParamList } from '../../types';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { maintenanceStore, vehicleStore } from '../../../stores';
-import { FILTER_TABS } from '../maintenance';
+
 import { colors } from '../../../theme/colors';
+import { useTranslation } from 'react-i18next';
 
 type Props = NativeStackScreenProps<VehiclesStackParamList, 'RepairsReport'>;
 
 export const RepairReportScreen = ({ route }: Props) => {
   const { vehicleId } = route.params;
+  const {t} = useTranslation();
   const vehicle = vehicleStore.getVehicleById(vehicleId);
   const repairs = maintenanceStore.getVehicleRepairs(vehicleId);
+  const filterTabs = useMemo(() => [
+      { title: t('maintenance.filters.all'), tab: 'all' as const },
+      { title: t('maintenance.filters.planned'), tab: 'planned' as const },
+      { title: t('maintenance.filters.in_progress'), tab: 'in_progress' as const },
+      { title: t('maintenance.filters.completed'), tab: 'completed' as const },
+    ], [t]);
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
@@ -173,7 +181,7 @@ export const RepairReportScreen = ({ route }: Props) => {
                     : '';
 
                   const statusTitle =
-                    FILTER_TABS.find((t) => t.tab === item.status)?.title || item.status;
+                    filterTabs.find((t) => t.tab === item.status)?.title || item.status;
                   const priorityColor = getPriorityColor(item.priority);
                   const badgeClass = getBadgeClass(item.status);
                   const priorityText =

@@ -7,6 +7,7 @@ import { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 import { useLanguage } from "../../../localization/LangContext";
 import { useTheme } from "../../../theme/ThemeContext";
 import CheckIcon from "../../../assets/icons/check.svg";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   onClose: ()=>void;
@@ -16,7 +17,7 @@ export const LanguageSheet =({onClose}: Props)=> {
   
   const {currentLanguage, changeLanguage} = useLanguage();
   const  {theme} = useTheme();
-
+  const {t} = useTranslation();
 
   const [error, setError] = useState<string>("");
 
@@ -34,11 +35,11 @@ export const LanguageSheet =({onClose}: Props)=> {
       keyboardShouldPersistTaps="handled"
     >
       <AppText style={styles.title}>
-        Language
+        {t("profile.language")}
       </AppText>
 
       <PlainText style={styles.description}>
-        Choose the language used across FleetCare.
+        {t("profile.languageDescription")}
       </PlainText>
 
       

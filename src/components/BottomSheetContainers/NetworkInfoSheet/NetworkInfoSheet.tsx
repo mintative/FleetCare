@@ -7,6 +7,7 @@ import { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 
 import { useTheme } from "../../../theme/ThemeContext";
 import { useNetInfo } from '@react-native-community/netinfo';
+import { useTranslation } from "react-i18next";
 
 
 type Props = {
@@ -16,6 +17,7 @@ export const NetworkInfoSheet =({onClose}: Props)=> {
   const netInfo = useNetInfo();
 
   const  {theme} = useTheme();
+  const {t} = useTranslation();
 
   return (
     <View style={styles.container}>
@@ -25,22 +27,22 @@ export const NetworkInfoSheet =({onClose}: Props)=> {
       keyboardShouldPersistTaps="handled"
     >
       <AppText style={styles.title}>
-        Network status
+        {t("profile.networkStatus")}
       </AppText>
 
       
 
       <View style={[styles.listContainer, {backgroundColor: theme.card}]}>
         <View style={styles.item}>
-          <PlainText style={styles.leftText}>Network type</PlainText>
+          <PlainText style={styles.leftText}>{t("profile.networkType")}</PlainText>
           <AppText style={styles.rightText}>{netInfo.type}</AppText>
         </View>
         <View style={styles.item}>
-          <PlainText style={styles.leftText}>Is connected</PlainText>
+          <PlainText style={styles.leftText}>{t("profile.isConnected")}</PlainText>
           <AppText style={styles.rightText}>{netInfo.isConnected ? "Yes" : "No"}</AppText>
         </View>
         <View style={styles.item}>
-          <PlainText style={styles.leftText}>Is Internet reachable</PlainText>
+          <PlainText style={styles.leftText}>{t("profile.isInternetReachable")}</PlainText>
           <AppText style={styles.rightText}>{netInfo.isInternetReachable ? "Yes" : "No"}</AppText>
         </View>
       </View>

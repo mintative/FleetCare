@@ -6,7 +6,10 @@ import { PlainText } from "../../PlainText";
 import { BottomSheetFlatList } from "@gorhom/bottom-sheet";
 import { useTheme } from "../../../theme/ThemeContext";
 import CheckIcon from "../../../assets/icons/check.svg";
-import { priorities, Priority } from "../../../navigation/screens/addRepair";
+import {  Priority } from "../../../navigation/screens/addRepair";
+import { useTranslation } from "react-i18next";
+import { colors } from "../../../theme/colors";
+import { useMemo } from "react";
 
 
 
@@ -21,6 +24,33 @@ type Props = {
 export const PrioritySelectionSheet = ({ onClose, priority, setPriority}: Props) => {
   
   const { theme } = useTheme();
+  const {t} = useTranslation();
+  const priorities = useMemo(()=>[
+    {
+      priority: "low",
+      title: t("maintenance.priorities.low"),
+      description: t("maintenance.priorities.lowDescription"),
+      textColor: colors.greenDark,
+    },
+    {
+      priority: "medium",
+      title: t("maintenance.priorities.medium"),
+      description: t("maintenance.priorities.mediumDescription"),
+      textColor: colors.blueDark,
+    },
+    {
+      priority: "high",
+      title: t("maintenance.priorities.high"),
+      description: t("maintenance.priorities.highDescription"),
+      textColor: colors.orangeDark,
+    },
+    {
+      priority: "critical",
+      title: t("maintenance.priorities.critical"),
+      description: t("maintenance.priorities.criticalDescription"),
+      textColor: colors.redDark,
+    },
+  ], [t])
 
   const onChoose = (priority: Priority) => {
     setPriority(priority);
@@ -38,8 +68,8 @@ export const PrioritySelectionSheet = ({ onClose, priority, setPriority}: Props)
         ItemSeparatorComponent={<View style={{height:10}}></View>}
         ListHeaderComponent={
           <View>
-          <AppText style={styles.title}>Maintenance priority</AppText>
-          <PlainText style={styles.description}>How urgently does this need attention?</PlainText>
+          <AppText style={styles.title}>{t("maintenance.selectPriority")}</AppText>
+          <PlainText style={styles.description}>{t("maintenance.selectPriorityDescription")}</PlainText>
           </View>
         }
         renderItem={({ item }) => {

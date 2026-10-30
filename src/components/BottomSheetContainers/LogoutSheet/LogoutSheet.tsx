@@ -9,6 +9,7 @@ import LogoutIcon from "../../../assets/icons/logout.svg";
 import { colors } from "../../../theme/colors";
 import { PlainText } from "../../PlainText";
 import { authStore } from "../../../stores/AuthStore";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   onClose: ()=>void;
@@ -17,6 +18,7 @@ type Props = {
 export const LogoutSheet =({onClose}: Props)=> {
   
   const  {theme} = useTheme();
+  const {t} = useTranslation();
 
   const logout = () => {
     authStore.logout();
@@ -38,9 +40,9 @@ export const LogoutSheet =({onClose}: Props)=> {
         </View>
         <View>
           <AppText style={styles.title}>
-          Sign out of FleetCare?
+          {t("profile.logoutTitle")}
         </AppText>
-        <PlainText>You'll need to sign in again to view your fleet</PlainText>
+        <PlainText>{t("profile.logoutDescription")}</PlainText>
         </View>
       </View>
       
@@ -50,13 +52,13 @@ export const LogoutSheet =({onClose}: Props)=> {
             style={styles.logout}
             onPress={logout}
           >
-            <AppText style={styles.logoutText}>Sign out</AppText>
+            <AppText style={styles.logoutText}>{t("profile.logoutButton")}</AppText>
           </Pressable>
           <Pressable
             style={styles.cancel}
             onPress={cancel}
           >
-            <AppText style={styles.cancelText}>Cancel</AppText>
+            <AppText style={styles.cancelText}>{t("common.cancel")}</AppText>
           </Pressable>
       </View>
 

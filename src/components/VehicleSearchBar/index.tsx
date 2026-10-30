@@ -10,6 +10,7 @@ import { observer } from "mobx-react-lite";
 import { vehicleStore } from "../../stores";
 import { colors } from "../../theme/colors";
 import { useTheme } from "../../theme/ThemeContext";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   value: string;
@@ -23,6 +24,7 @@ export const VehicleSearchBar = observer(({
   onFilterPress,
 }: Props) => {
   const {theme} = useTheme();
+  const {t} = useTranslation();
 
   return (
     <View style={styles.container}>
@@ -35,7 +37,7 @@ export const VehicleSearchBar = observer(({
           style={[styles.input, {color: theme.text}]}
           value={value}
           onChangeText={onChangeText}
-          placeholder="Search by vehicle, plate or VIN"
+          placeholder={t("vehicles.searchPlaceholder")}
           placeholderTextColor="#7B87A2"
           autoCapitalize="none"
           autoCorrect={false}

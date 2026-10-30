@@ -21,6 +21,9 @@ import { DeleteButton } from "../../../components/DeleteButton"
 import { DeleteSheet } from "../../../components/BottomSheetContainers/DeleteSheet/DeleteSheet"
 import { showMessage } from "react-native-flash-message"
 import Share from "react-native-share"
+import { useTranslation } from "react-i18next"
+import { useLanguage } from "../../../localization/LangContext"
+import { EditVehicleSheet } from "../../../components/BottomSheetContainers/EditVehicleSheet/EditVehicleSheet"
 
 
 type Props = NativeStackScreenProps<VehiclesStackParamList, "VehicleDetails">
@@ -70,8 +73,26 @@ export const VehicleDetails = observer(({navigation, route}: Props) => {
     const sheetRef = useRef<BottomSheetRef>(null);
     const deleteSheetRef = useRef<BottomSheetRef>(null);
     const {theme} = useTheme();
+    const {t} = useTranslation();
+    const {currentLanguage} = useLanguage();
     const { vehicleId } = route.params;
     const vehicle = vehicleStore.getVehicleById(vehicleId);
+
+
+    const statuses = [
+    {
+        option: "active",
+        title: t("vehicles.filter.statuses.active"),
+    },
+    {
+        option: "maintenance",
+        title: t("vehicles.filter.statuses.in_maintenance"),
+    },
+    {
+        option: "inactive",
+        title: t("vehicles.filter.statuses.inactive")
+    }
+    ]
 
     const getImageSource = () => {
         if(vehicle) {
@@ -103,7 +124,7 @@ export const VehicleDetails = observer(({navigation, route}: Props) => {
             navigation.navigate("VehiclesMain");
             vehicleStore.removeVehicle(vehicle.id);
             showMessage({
-                message: `${vehicle.brand} ${vehicle.model} was removed`
+                message: `${vehicle.brand} ${vehicle.model} ${t("vehicles.form.removeMessage")}`
             })
             
         }
@@ -114,7 +135,7 @@ export const VehicleDetails = observer(({navigation, route}: Props) => {
         if (!vehicle) return;
 
         const inspectionFormatted = vehicle.inspectionDate
-            ? vehicle.inspectionDate.toLocaleDateString("en-UK", {
+            ? vehicle.inspectionDate.toLocaleDateString(currentLanguage, {
                   day: "2-digit",
                   month: "short",
                   year: "numeric",
@@ -150,7 +171,7 @@ export const VehicleDetails = observer(({navigation, route}: Props) => {
     if (!vehicle) {
         return (
         <ScreenContainer>
-            <AppText>Vehicle not found</AppText>
+            <AppText>{t("vehicles.noOneFound")}</AppText>
         </ScreenContainer>
         );
     }
@@ -179,7 +200,7 @@ export const VehicleDetails = observer(({navigation, route}: Props) => {
                         <View style={styles.row}>
                             <AppText style={[styles.plateNumber, {backgroundColor:theme.card}]}>{vehicle.plateNumber}</AppText>
                             <Badge 
-                                title={vehicle.status.charAt(0).toUpperCase() + vehicle.status.slice(1)}
+                                title={statuses.find(s=>s.option===vehicle.status)?.title??""}
                                 type={getStatus(vehicle.status)}
                             />
                         </View>
@@ -187,7 +208,7 @@ export const VehicleDetails = observer(({navigation, route}: Props) => {
                 </LinearGradient>
 
                 <View style={[styles.information, {backgroundColor: theme.card}]}>
-                    <PlainText style={{fontWeight:"bold"}}>VEHICLE INFORMATION</PlainText>
+                    <PlainText style={{fontWeight:"bold"}}>{t("vehicles.details.vehicleInformation").toUpperCase()}</PlainText>
                     <View style={styles.infoList}>
                         <View style={styles.infoRow}>
                             <PlainText>VIN</PlainText>
@@ -214,7 +235,7 @@ export const VehicleDetails = observer(({navigation, route}: Props) => {
 
 
                 <View style={[styles.information, {backgroundColor: theme.card}]}>
-                    <PlainText style={{fontWeight:"bold"}}>UPCOMING INSPECTION</PlainText>
+                    <PlainText style={{fontWeight:"bold"}}>{t("vehicles.details.upcomingInspection").toUpperCase()}</PlainText>
                     <View style={{marginTop:10}}>
                         <AppText style={{fontSize:32, fontWeight:"bold"}}>{vehicle.inspectionDate?.toLocaleDateString("en-UK", {day:"2-digit", month:"short", year:"numeric"})}</AppText>
                         <AppText style={{fontSize:18, fontWeight:"bold", marginTop:5, color: getInspectionColor(vehicle.inspectionDate)}}>{vehicle.inspectionDate? getDaysUntil(vehicle.inspectionDate): "No date"}</AppText>
@@ -222,21 +243,27 @@ export const VehicleDetails = observer(({navigation, route}: Props) => {
                 </View>
 
                 <View style={[styles.information, {backgroundColor: theme.card}]}>
-                    <PlainText style={{fontWeight:"bold"}}>REPAIRS REPORT</PlainText>
+                    <PlainText style={{fontWeight:"bold"}}>{t("vehicles.details.repairsReport").toUpperCase()}</PlainText>
                     <Pressable
                     onPress={()=>{navigation.navigate("RepairsReport", {vehicleId: vehicle.id})}}
                         style={[styles.button, {backgroundColor:theme.background}]}
                     >
-                        <AppText style={[styles.buttonText, {color:theme.text}]}>View repairs report</AppText>
+                        <AppText style={[styles.buttonText, {color:theme.text}]}>{t("vehicles.details.repairsReportButton")}</AppText>
                     </Pressable>
                 </View>
-                <DeleteButton title="Remove vehicle" onPress={()=>{deleteSheetRef.current?.open()}} />
+                <DeleteButton title={t("vehicles.details.removeButton")} onPress={()=>{deleteSheetRef.current?.open()}} />
             </ScrollView>
+            <BottomSheet
+                ref={sheetRef}
+                snapPoints={['90%']}
+            >
+                <EditVehicleSheet onClose={() => sheetRef.current?.close()} vehicle={vehicle}/>
+            </BottomSheet>
             <BottomSheet
                 ref={deleteSheetRef}
                 snapPoints={['35%']}
             >
-                <DeleteSheet onClose={() => deleteSheetRef.current?.close()} onConfirm={()=>{onDeleteVehicle()}} title={`Romove ${vehicle.brand} ${vehicle.model}?`} />
+                <DeleteSheet onClose={() => deleteSheetRef.current?.close()} onConfirm={()=>{onDeleteVehicle()}} title={`Remove ${vehicle.brand} ${vehicle.model}?`} />
             </BottomSheet>
             
         </ScreenContainer>
