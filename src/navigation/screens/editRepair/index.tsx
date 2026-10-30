@@ -20,6 +20,7 @@ import { PrioritySelectionSheet } from "../../../components/BottomSheetContainer
 import { DatePickerField } from "../../../components/DatePickerField";
 import { FormButton } from "../../../components/FormButton";
 import { Repair } from "../../../types";
+import { DeleteSheet } from "../../../components/BottomSheetContainers/DeleteSheet/DeleteSheet";
 
 type Props = NativeStackScreenProps<MaintenanceStackParamList, "EditRepair">;
 export type Priority = "low" | "high" | "medium" | "critical";
@@ -90,7 +91,9 @@ export const EditRepairScreen = observer(({ navigation, route }: Props) => {
 
   const vehicleSelectionSheetRef = useRef<BottomSheetRef>(null);
   const prioritySelectionSheetRef = useRef<BottomSheetRef>(null);
+  const deleteSheetRef = useRef<BottomSheetRef>(null);
   const { theme } = useTheme();
+
 
   if (!repair) {
     return (
@@ -174,6 +177,21 @@ export const EditRepairScreen = observer(({ navigation, route }: Props) => {
       });
     }
   };
+  
+  const onDeleteRepair = () => {
+        if (repair) {
+            navigation.navigate("MaintenanceMain");
+            maintenanceStore.removeRepair(repair.id);
+            showMessage({
+                message: `Repair was removed`
+            })
+            
+        }
+        return;
+    }
+
+
+  const vehicle = selectedVehicle ?vehicleStore.getVehicleById(selectedVehicle) :null;
 
   return (
     <ScreenContainer>
@@ -183,6 +201,7 @@ export const EditRepairScreen = observer(({ navigation, route }: Props) => {
         onBackPress={() => {
           navigation.goBack();
         }}
+        onDeleteButtonPress={()=>{deleteSheetRef.current?.open()}}
       />
       <ScrollView
         contentContainerStyle={{
@@ -207,10 +226,10 @@ export const EditRepairScreen = observer(({ navigation, route }: Props) => {
               ]}
             >
               {selectedVehicle
-                ? `${vehicleStore.getVehicleById(selectedVehicle)?.brand} ${
-                    vehicleStore.getVehicleById(selectedVehicle)?.model
+                ? `${vehicle?.brand} ${
+                    vehicle?.model
                   } ∙ ${
-                    vehicleStore.getVehicleById(selectedVehicle)?.plateNumber
+                    vehicle?.plateNumber
                   }`
                 : "Select vehicle"}
             </Text>
@@ -306,6 +325,13 @@ export const EditRepairScreen = observer(({ navigation, route }: Props) => {
           <AppText style={{ color: "#fff", fontSize: 22 }}>Update repair</AppText>
         </FormButton>
       </ScrollView>
+
+      <BottomSheet
+                ref={deleteSheetRef}
+                snapPoints={['35%']}
+            >
+                <DeleteSheet onClose={() => deleteSheetRef.current?.close()} onConfirm={()=>{onDeleteRepair()}} title={`Remove this repair?`} />
+            </BottomSheet>
 
       <BottomSheet ref={vehicleSelectionSheetRef} snapPoints={["90%"]}>
         <VehicleSelectionSheet

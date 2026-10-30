@@ -1,23 +1,29 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import MaskedView from '@react-native-masked-view/masked-view';
 import LinearGradient from 'react-native-linear-gradient';
-import { Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet, StyleProp, TextStyle } from 'react-native';
 import { AppText } from '../AppText';
+import { colors } from '../../theme/colors';
 
-export default function GradientText() {
+type Props = {
+  title: string;
+  style: StyleProp<TextStyle>;
+}
+
+export default function GradientText({title, style}:Props) {
   return (
     <MaskedView
       maskElement={
-        <Text style={styles.text}>Hello React Native</Text>
+        <AppText style={[styles.text, style]}>{title}</AppText>
       }
     >
       <LinearGradient
-        colors={['#6366F1', '#EC4899']}
+        colors={[colors.primaryColor, colors.secondaryColor]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
       >
-        <AppText style={[styles.text, { opacity: 0 }]}>
-          Hello React Native
+        <AppText style={[styles.text, style, { opacity: 0 }]}>
+          {title}
         </AppText>
       </LinearGradient>
     </MaskedView>

@@ -2,6 +2,7 @@ import { Pressable, StyleProp, Text, View, ViewStyle } from "react-native"
 import { styles } from "./styles"
 import { AppText } from "../AppText"
 import { PlainText } from "../PlainText"
+import GradientText from "../GradientText"
 
 type Props = {
     title: string;
@@ -14,7 +15,7 @@ export const Header = (props: Props) => {
     return (
         <View style={[styles.container, props.style]}>
             <View>
-                <AppText style={styles.title}>{props.title}</AppText>
+                <GradientText title={props.title} style={styles.title} />
                 {props.par &&  <PlainText style={styles.par}>{props.par}</PlainText>}
             </View>
             

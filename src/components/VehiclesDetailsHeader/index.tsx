@@ -5,6 +5,7 @@ import BackArrowIcon from "../../assets/icons/back-arrow.svg";
 import { PlainText } from "../PlainText";
 import { Vehicle } from "../../types";
 import EditIcon from "../../assets/icons/edit.svg";
+import ShareIcon from "../../assets/icons/share.svg";
 import { useTheme } from "../../theme/ThemeContext";
 
 
@@ -12,9 +13,10 @@ type Props = {
     onBackPress: ()=>void;
     onEditPress: ()=>void;
     vehicle: Vehicle;
+    onSharePress?: ()=>void;
 }
 
-export const VehicleDetailsHeader = ({onBackPress, onEditPress, vehicle}: Props) => {
+export const VehicleDetailsHeader = ({onBackPress, onEditPress, vehicle, onSharePress}: Props) => {
     const {theme} = useTheme();
         
 
@@ -33,12 +35,23 @@ export const VehicleDetailsHeader = ({onBackPress, onEditPress, vehicle}: Props)
                     <PlainText style={styles.par}>{vehicle.plateNumber}</PlainText>
                 </View>
             </View>
-            <Pressable
+            <View style={{flexDirection:"row", alignItems:"center"}}>
+                <Pressable
                     onPress={()=>{onEditPress()}}
                     style={styles.editButton}
                 >
                     <EditIcon  width={25} height={25} color={theme.text}/>
                 </Pressable>
+                {onSharePress &&
+                <Pressable
+                    onPress={()=>{onSharePress()}}
+                    style={styles.editButton}
+                >
+                    <ShareIcon  width={25} height={25} color={theme.text}/>
+                </Pressable>
+                }
+            </View>
+            
         </View>
     )
 }

@@ -85,5 +85,11 @@
 	<false/>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We need your geolocation to show it to you in settings.</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>whatsapp</string>
+		<string>mailto</string>
+		<string>instagram</string>
+	</array>
 </dict>
 </plist>

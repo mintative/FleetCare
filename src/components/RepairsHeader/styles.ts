@@ -11,23 +11,35 @@ export const styles = EStyleSheet.create({
         justifyContent: "space-between"
     },
     left: {
+        flex: 1,
         flexDirection: "row",
         alignItems: "center",
         gap:10
     },
+    row: {
+        flex: 1,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+    },
     backButton: {
         padding:8,
         borderRadius: 999,
-
+        
     },
     editButton: {
         padding:8,
         borderRadius: 999,
 
     },
+    deleteButton: {
+        padding:10,
+        borderRadius: 999,
+        backgroundColor: colors.redLight,
+    },
     title: {
         fontSize: 20,
-        fontWeight: "bold"
+        fontWeight: "bold",
     },
     par: {
         marginTop: 5,

@@ -61,7 +61,7 @@ imagePicker: {
   height: 190,
   borderWidth: 1,
   borderColor: "#D1D5DB",
-  borderStyle: "dashed",
+
   borderRadius: 14,
   overflow: "hidden",
   backgroundColor: "#F9FAFB",

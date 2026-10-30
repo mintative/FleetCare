@@ -15,6 +15,8 @@ import VehiclesIcon from '../../assets/icons/vehicles.svg';
 import MaintenanceIcon from '../../assets/icons/maintenance.svg';
 import ProfileIcon from '../../assets/icons/profile.svg';
 import { useTheme } from '../../theme/ThemeContext';
+import { CopilotStep } from 'react-native-copilot';
+import { CopilotTouchableOpacity } from '../../components/Walkthroughables';
 
 const Tab = createBottomTabNavigator<PrivateTabParamList>();
 
@@ -78,6 +80,21 @@ export default function PrivateTabs() {
               opacity={focused ? 1 : 0.8}
             />
           ),
+          tabBarButton: (props) => (
+            <CopilotStep
+              text="Your home screen"
+              order={2}
+              name="homeTab"
+            >
+              <CopilotTouchableOpacity
+                {...props}
+                collapsable={false}
+                style={[props.style, { flex: 1 }]}
+              >
+                {props.children}
+              </CopilotTouchableOpacity>
+            </CopilotStep>
+          ),
         }}
       />
         <Tab.Screen
@@ -94,6 +111,21 @@ export default function PrivateTabs() {
               opacity={focused ? 1 : 0.8}
             />
           ),
+          tabBarButton: (props) => (
+            <CopilotStep
+              text="Your vehicles"
+              order={3}
+              name="vehiclesTab"
+            >
+              <CopilotTouchableOpacity
+                {...props}
+                collapsable={false}
+                style={[props.style, { flex: 1 }]}
+              >
+                {props.children}
+              </CopilotTouchableOpacity>
+            </CopilotStep>
+          ),
         }}
       />
       <Tab.Screen
@@ -109,6 +141,21 @@ export default function PrivateTabs() {
               color={color}
               opacity={focused ? 1 : 0.8}
             />
+          ),
+          tabBarButton: (props) => (
+            <CopilotStep
+              text="Your repairs"
+              order={4}
+              name="maintenanceTab"
+            >
+              <CopilotTouchableOpacity
+                {...props}
+                collapsable={false}
+                style={[props.style, { flex: 1 }]}
+              >
+                {props.children}
+              </CopilotTouchableOpacity>
+            </CopilotStep>
           ),
         }}
       />
@@ -129,6 +176,21 @@ export default function PrivateTabs() {
               color={color}
               opacity={focused ? 1 : 0.8}
             />
+          ),
+          tabBarButton: (props) => (
+            <CopilotStep
+              text="Your profile"
+              order={5}
+              name="profileTab"
+            >
+              <CopilotTouchableOpacity
+                {...props}
+                collapsable={false}
+                style={[props.style, { flex: 1 }]}
+              >
+                {props.children}
+              </CopilotTouchableOpacity>
+            </CopilotStep>
           ),
         }}
       />

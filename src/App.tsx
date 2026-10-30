@@ -14,6 +14,7 @@ import { ThemeProvider, useTheme } from './theme/ThemeContext';
 import { AppStatusBar } from './components/StatusBar';
 import { LanguageProvider } from './localization/LangContext';
 import SplashScreen from 'react-native-splash-screen-newarch';
+import { CopilotProvider } from 'react-native-copilot';
 
 EStyleSheet.build({
   $primaryColor: colors.primaryColor,
@@ -114,7 +115,28 @@ const App = observer(() => {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <ThemeProvider>
         <LanguageProvider>
+          <CopilotProvider
+            overlay="svg"
+            animated={true}
+            backdropColor="rgba(19, 34, 69, 0.75)"
+            verticalOffset={8}
+            arrowColor="#1E293B"
+            tooltipStyle={{
+              backgroundColor: '#fff',
+              borderRadius: 20,
+              padding: 16,
+            }}
+            labels={{
+              previous: 'Back',
+              next: 'Next',
+              skip: 'Skip',
+              finish: 'Finish',
+            }}
+            
+            stepNumberComponent={() => null}
+          >
           <MainContent />
+          </CopilotProvider>
         </LanguageProvider>
       </ThemeProvider>
     </GestureHandlerRootView>

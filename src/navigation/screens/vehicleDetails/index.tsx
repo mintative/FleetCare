@@ -13,10 +13,14 @@ import { PlainText } from "../../../components/PlainText"
 import { Badge } from "../../../components/Badge"
 import BottomSheet, { BottomSheetRef } from "../../../components/BottomSheet"
 import { useRef } from "react"
-import { EditVehicleSheet } from "../../../components/BottomSheetContainers/EditVehicleSheet/EditVehicleSheet"
+
 import { Vehicle } from "../../../types"
 import { useTheme } from "../../../theme/ThemeContext"
 import { LOCAL_IMAGES } from "../../../services/localImages"
+import { DeleteButton } from "../../../components/DeleteButton"
+import { DeleteSheet } from "../../../components/BottomSheetContainers/DeleteSheet/DeleteSheet"
+import { showMessage } from "react-native-flash-message"
+import Share from "react-native-share"
 
 
 type Props = NativeStackScreenProps<VehiclesStackParamList, "VehicleDetails">
@@ -64,6 +68,7 @@ const getStatus = (status: Vehicle["status"]) => {
 
 export const VehicleDetails = observer(({navigation, route}: Props) => {
     const sheetRef = useRef<BottomSheetRef>(null);
+    const deleteSheetRef = useRef<BottomSheetRef>(null);
     const {theme} = useTheme();
     const { vehicleId } = route.params;
     const vehicle = vehicleStore.getVehicleById(vehicleId);
@@ -92,6 +97,56 @@ export const VehicleDetails = observer(({navigation, route}: Props) => {
         
       };
 
+
+    const onDeleteVehicle = () => {
+        if (vehicle) {
+            navigation.navigate("VehiclesMain");
+            vehicleStore.removeVehicle(vehicle.id);
+            showMessage({
+                message: `${vehicle.brand} ${vehicle.model} was removed`
+            })
+            
+        }
+        return;
+    }
+
+    const handleShareVehicle = async () => {
+        if (!vehicle) return;
+
+        const inspectionFormatted = vehicle.inspectionDate
+            ? vehicle.inspectionDate.toLocaleDateString("en-UK", {
+                  day: "2-digit",
+                  month: "short",
+                  year: "numeric",
+              })
+            : "Not scheduled";
+
+        const inspectionDays = vehicle.inspectionDate 
+            ? getDaysUntil(vehicle.inspectionDate) 
+            : "";
+
+        const shareMessage = 
+        `*Vehicle Info: ${vehicle.brand} ${vehicle.model}*
+        Plate Number: ${vehicle.plateNumber || "-"}
+        VIN: ${vehicle.VIN || "-"}
+        Fuel Type: ${vehicle.fuel || "-"}
+        Mileage: ${vehicle.mileage ? `${vehicle.mileage} km` : "-"}
+
+        *Upcoming Inspection:*
+        ${inspectionFormatted} (${inspectionDays})`;
+
+        try {
+            await Share.open({
+                title: `Share ${vehicle.brand} ${vehicle.model} Info`,
+                message: shareMessage,
+            });
+        } catch (error: any) {
+            if (error?.message && error.message !== 'User did not share') {
+                console.log("Error sharing vehicle details:", error);
+            }
+        }
+    };
+
     if (!vehicle) {
         return (
         <ScreenContainer>
@@ -102,7 +157,7 @@ export const VehicleDetails = observer(({navigation, route}: Props) => {
 
     return (
         <ScreenContainer>
-            <VehicleDetailsHeader vehicle={vehicle} onBackPress={()=>{navigation.goBack()}} onEditPress={() => sheetRef.current?.open()} />
+            <VehicleDetailsHeader vehicle={vehicle} onBackPress={()=>{navigation.goBack()}} onEditPress={() => sheetRef.current?.open()} onSharePress={()=>{handleShareVehicle()}} />
             <ScrollView
                 contentContainerStyle={{flexGrow: 1,paddingBottom:50}}
                 style={{padding:20}}
@@ -175,12 +230,13 @@ export const VehicleDetails = observer(({navigation, route}: Props) => {
                         <AppText style={[styles.buttonText, {color:theme.text}]}>View repairs report</AppText>
                     </Pressable>
                 </View>
+                <DeleteButton title="Remove vehicle" onPress={()=>{deleteSheetRef.current?.open()}} />
             </ScrollView>
             <BottomSheet
-                ref={sheetRef}
-                snapPoints={['90%']}
+                ref={deleteSheetRef}
+                snapPoints={['35%']}
             >
-                <EditVehicleSheet onClose={() => sheetRef.current?.close()} vehicle={vehicle} />
+                <DeleteSheet onClose={() => deleteSheetRef.current?.close()} onConfirm={()=>{onDeleteVehicle()}} title={`Romove ${vehicle.brand} ${vehicle.model}?`} />
             </BottomSheet>
             
         </ScreenContainer>
