@@ -41,5 +41,14 @@ export const styles = EStyleSheet.create({
         flexDirection:"row",
         justifyContent: "space-between",
         paddingVertical:10,
+    },
+    button: {
+        padding:10,
+        marginTop:10,
+        borderRadius: 999
+    },
+    buttonText: {
+        textAlign:"center",
+        fontSize: 18
     }
 });

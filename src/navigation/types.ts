@@ -16,6 +16,7 @@ export type InspectionsStackParamList = {
 export type VehiclesStackParamList = {
   VehiclesMain: undefined;
   VehicleDetails: {vehicleId: string};
+  RepairsReport: {vehicleId: string};
 };
 
 export type MaintenanceStackParamList = {

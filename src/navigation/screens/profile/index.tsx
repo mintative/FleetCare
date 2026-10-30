@@ -15,6 +15,8 @@ import { useRef } from 'react';
 import { LanguageSheet } from '../../../components/BottomSheetContainers/LanguageSheet/LanguageSheet';
 import { DeviceInfoSheet } from '../../../components/BottomSheetContainers/DeviceInfoSheet/DevideInfoSheet';
 import { LogoutSheet } from '../../../components/BottomSheetContainers/LogoutSheet/LogoutSheet';
+import { NetworkInfoSheet } from '../../../components/BottomSheetContainers/NetworkInfoSheet/NetworkInfoSheet';
+import { GeolocationSheet } from '../../../components/BottomSheetContainers/GeolocationSheet/GeolocationSheet';
 
 
 
@@ -23,6 +25,8 @@ type Props = NativeStackScreenProps<ProfileStackParamList, 'ProfileMain'>;
 export default function ProfileScreen({ navigation }: Props) {
   const languageSheetRef = useRef<BottomSheetRef>(null);
   const deviceInfoSheetRef = useRef<BottomSheetRef>(null);
+  const networkInfoSheetRef = useRef<BottomSheetRef>(null);
+  const geolocationSheetRef = useRef<BottomSheetRef>(null);
   const logoutSheetRef = useRef<BottomSheetRef>(null);
 
   return (
@@ -35,7 +39,11 @@ export default function ProfileScreen({ navigation }: Props) {
         <ThemeSwitcher />
         <LangSwitcher onPress={() => languageSheetRef.current?.open()}/>
         <SecuritySwitcher />
-        <AppSettings onPress={() => deviceInfoSheetRef.current?.open()} />
+        <AppSettings 
+        onDeviceInfoPress={() => deviceInfoSheetRef.current?.open()} 
+        onNetworkInfoPress={() => networkInfoSheetRef.current?.open()} 
+        onGeolocationPress={() => geolocationSheetRef.current?.open()} 
+        />
         <LogoutButton onPress={() => logoutSheetRef.current?.open()} />
       </ScrollView>
       
@@ -50,6 +58,18 @@ export default function ProfileScreen({ navigation }: Props) {
         snapPoints={['50%']}
       >
         <DeviceInfoSheet onClose={() => deviceInfoSheetRef.current?.close()} />
+      </BottomSheet>
+      <BottomSheet
+        ref={networkInfoSheetRef}
+        snapPoints={['35%']}
+      >
+        <NetworkInfoSheet onClose={() => networkInfoSheetRef.current?.close()} />
+      </BottomSheet>
+      <BottomSheet
+        ref={geolocationSheetRef}
+        snapPoints={['30%']}
+      >
+        <GeolocationSheet onClose={() => geolocationSheetRef.current?.close()} />
       </BottomSheet>
       <BottomSheet
         ref={logoutSheetRef}

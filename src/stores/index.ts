@@ -7,6 +7,6 @@ import { mockVehicles, mockRepairs } from '../data/data';
 // maintenanceStore.setRepairs(mockRepairs);
 
 
-
+// vehicleStore.clearVehicles()
 
 export { vehicleStore, maintenanceStore };

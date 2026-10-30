@@ -1,4 +1,4 @@
-import { Image, ScrollView, View } from "react-native"
+import { Image, Pressable, ScrollView, View } from "react-native"
 import { VehiclesStackParamList } from "../../types"
 import { NativeStackScreenProps } from "@react-navigation/native-stack"
 import { AppText } from "../../../components/AppText"
@@ -164,6 +164,15 @@ export const VehicleDetails = observer(({navigation, route}: Props) => {
                         <AppText style={{fontSize:32, fontWeight:"bold"}}>{vehicle.inspectionDate?.toLocaleDateString("en-UK", {day:"2-digit", month:"short", year:"numeric"})}</AppText>
                         <AppText style={{fontSize:18, fontWeight:"bold", marginTop:5, color: getInspectionColor(vehicle.inspectionDate)}}>{vehicle.inspectionDate? getDaysUntil(vehicle.inspectionDate): "No date"}</AppText>
                     </View>
+                </View>
+
+                <View style={[styles.information, {backgroundColor: theme.card}]}>
+                    <PlainText style={{fontWeight:"bold"}}>REPAIRS REPORT</PlainText>
+                    <Pressable
+                        style={[styles.button, {backgroundColor:theme.background}]}
+                    >
+                        <AppText style={[styles.buttonText, {color:theme.text}]}>View repairs report</AppText>
+                    </Pressable>
                 </View>
             </ScrollView>
             <BottomSheet
