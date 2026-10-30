@@ -169,6 +169,7 @@ export const VehicleDetails = observer(({navigation, route}: Props) => {
                 <View style={[styles.information, {backgroundColor: theme.card}]}>
                     <PlainText style={{fontWeight:"bold"}}>REPAIRS REPORT</PlainText>
                     <Pressable
+                    onPress={()=>{navigation.navigate("RepairsReport", {vehicleId: vehicle.id})}}
                         style={[styles.button, {backgroundColor:theme.background}]}
                     >
                         <AppText style={[styles.buttonText, {color:theme.text}]}>View repairs report</AppText>
