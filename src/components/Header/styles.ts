@@ -20,6 +20,7 @@ export const styles = EStyleSheet.create({
     button: {
         width: 48,
         height: 48,
+
         borderRadius: 24,
         alignItems: 'center',
         justifyContent: 'center',
@@ -28,7 +29,7 @@ export const styles = EStyleSheet.create({
 
     buttonText: {
         color: '#FFFFFF',
-        fontSize: 38,
+        fontSize: 32,
         fontWeight: '400',
 
         textAlign: 'center',

@@ -6,10 +6,12 @@ import { colors } from "../../theme/colors";
 import { AppText } from "../AppText";
 import { PrivateTabParamList } from "../../navigation/types";
 import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
-import { useNavigation } from "@react-navigation/native";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { observer } from "mobx-react-lite";
 import { vehicleStore } from "../../stores";
 import { useTranslation } from "react-i18next";
+import Animated, { useAnimatedStyle, useSharedValue, withSpring, withTiming } from "react-native-reanimated";
+import { useEffect } from "react";
 
 
 
@@ -21,17 +23,46 @@ type NavigationProp = BottomTabNavigationProp<
 
 
 
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 export const FleetOverview = observer(() => {
     const navigation = useNavigation<NavigationProp>();
     const {t} = useTranslation();
+    const opacity = useSharedValue(0);
+    const scale = useSharedValue(0);
+    const isFocused = useIsFocused();
+
+    const animatedStyle = useAnimatedStyle(()=>{
+        return {
+            opacity: opacity.value,
+            transform: [{ scale: scale.value }],
+        }
+    })
+
+    useEffect(() => {
+        if (isFocused) {
+            opacity.value = withTiming(1, { duration: 400 });
+            scale.value = withTiming(1, { duration: 200 });
+        }
+        else {
+            opacity.value = 0;
+            scale.value = 0;
+        }
+        
+    }, [isFocused]);
+
 
     const TOTAL_FLEET = vehicleStore.totalVehicles;
     const ACTIVE_FLEET = vehicleStore.activeVehicles;
     const INACTIVE_FLEET = TOTAL_FLEET - ACTIVE_FLEET;
     const PERCENTAGE = Math.round((ACTIVE_FLEET / TOTAL_FLEET) * 100);
+
+
+
+    
+
     return (
-        <Pressable onPress={()=>{navigation.navigate("Vehicles")}}>
+        <AnimatedPressable style={animatedStyle} onPress={()=>{navigation.navigate("Vehicles")}}>
         <LinearGradient
             colors={[colors.primaryColor, colors.secondaryColor]}
             start={{ x: 0, y: 0 }}
@@ -94,6 +125,6 @@ export const FleetOverview = observer(() => {
             </View>
             </View>
         </LinearGradient>
-        </Pressable>
+        </AnimatedPressable>
     );
 });

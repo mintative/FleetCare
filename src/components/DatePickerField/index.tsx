@@ -15,6 +15,7 @@ import { styles } from "./styles";
 import CrossIcon from "../../assets/icons/cross.svg";
 import { useTheme } from "../../theme/ThemeContext";
 import { useTranslation } from "react-i18next";
+import { useLanguage } from "../../localization/LangContext";
 
 type Props = {
   label: string;
@@ -68,6 +69,7 @@ export const DatePickerField = ({
   const [showIOSPicker, setShowIOSPicker] = useState(false);
   const {theme} = useTheme();
   const {t} = useTranslation();
+  const {currentLanguage} = useLanguage();
 
   const selectedDate = parseDate(value);
 
@@ -113,9 +115,7 @@ export const DatePickerField = ({
         <Pressable
           style={[styles.dateButton, {backgroundColor:theme.background}]}
           onPress={openPicker}
-          accessibilityRole="button"
-          accessibilityLabel={label}
-          accessibilityHint="Opens the date picker"
+
         >
           <AppText
             style={[
@@ -147,7 +147,7 @@ export const DatePickerField = ({
             value={selectedDate}
             mode="date"
             display="spinner"
-            locale="en-GB"
+            locale={currentLanguage}
             maximumDate={maximumDate}
             minimumDate={minimumDate}
             onChange={(_event, date) => {
